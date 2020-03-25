@@ -1,10 +1,9 @@
 /** @jsx jsx */
-import { css,Global,jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 
 import Logo from '../components/Logo';
 import Nav from '../components/Nav';
 import Telbox from '../components/Telbox';
-
 
 const headerstyle = css`
   background-color: #d13030;
@@ -35,21 +34,9 @@ const headerstyle = css`
   }
 `;
 
-
-
-
-
-
-
-
-
-
-const Header = (props) => {
+const Header = props => {
   return (
-    <header css=
-      {headerstyle}
-      {...props}
-    >
+    <header css={headerstyle} {...props}>
       <Logo type="header" />
       <Nav gnb />
       <Telbox />

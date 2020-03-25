@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css,Global,jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 
 const telboxstyle = css`
   display: none;
@@ -33,31 +33,18 @@ const telboxstyle = css`
   }
   @media (min-width: 1024px) {
     /* pc */
-    &{
+    & {
       display: block;
     }
-    
   }
   @media (max-width: 1024px) {
     /* m */
-
   }
 `;
 
-
-
-
-
-
-
-
-
-const Telbox = (props) => {
+const Telbox = props => {
   return (
-    <div css=
-      {telboxstyle}
-      {...props}
-    >
+    <div css={telboxstyle} {...props}>
       <div className="tel_i">
         <img src={require('../containers/img/tel_i.png')} alt="전화아이콘" />
       </div>

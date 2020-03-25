@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-
+import { Link } from 'react-router-dom';
 const Logo = props => {
   if (props.type === 'header') {
     return (
       <h1>
-        <a href="/">
+        <Link to="/">
           <img src={require('../containers/img/logo.png')} alt="원효로떡볶이" />
-        </a>
+        </Link>
       </h1>
     );
   } else if (props.type === 'footer') {
