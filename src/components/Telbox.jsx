@@ -46,7 +46,7 @@ const Telbox = props => {
   return (
     <div css={telboxstyle} {...props}>
       <div className="tel_i">
-        <img src={require('../containers/img/tel_i.png')} alt="전화아이콘" />
+        <img src={require('../img/tel_i.png')} alt="전화아이콘" />
       </div>
       <div className="tel_text">
         <span>가맹상담전화/온라인상담</span>

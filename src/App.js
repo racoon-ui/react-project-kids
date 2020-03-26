@@ -1,9 +1,10 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 /* style */
-import './containers/css/reset.css';
-import './containers/scss/common.scss';
+import './styles/common.scss';
+import Commonstyle from './components/Commonstyle';
 
 /* layout */
 import Header from './components/Header';
@@ -25,13 +26,16 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <Header />
+        
+        <Commonstyle /> {/* Globalstyle을 컴포넌트로 만든것 Commonstyle */}
+        
         <Switch>
           <Route exact path={['/', '/main']} component={Main} />
-          <Route path="/info" component={Info} />
-          <Route path="/menu" component={Menu} />
-          <Route path="/found" component={Found} />
-          <Route path="/branch" component={Branch} />
-          <Route path="/cs" component={Cs} />
+          <Route exact path="/info" component={Info} />
+          <Route exact path="/menu" component={Menu} />
+          <Route exact path="/found" component={Found} />
+          <Route exact path="/branch" component={Branch} />
+          <Route exact path="/cs" component={Cs} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

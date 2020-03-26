@@ -3,15 +3,16 @@ import { css, jsx } from '@emotion/core';
 
 import Nav from '../components/Nav';
 import Logo from '../components/Logo';
-import '../containers/scss/common.scss';
+
 
 const footerstyle = css`
   padding-bottom: 50px;
   background: #2f2f2f;
   text-align: center;
-
+  .sub-logo{
+    padding:30px 0;
+  }
   address {
-    margin-top: 30px;
     p {
       font-size: 14px;
       color: #828282;
@@ -31,7 +32,7 @@ const footerstyle = css`
 const Footer = props => {
   return (
     <footer css={footerstyle} {...props}>
-      <Nav sitemap />
+      <Nav type="sitemaplist" />
       <Logo type="footer" />
       <address>
         <p>

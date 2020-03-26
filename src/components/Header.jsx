@@ -19,7 +19,7 @@ const headerstyle = css`
     .tel_box {
       display: block;
     }
-    h1 {
+    h1.big-logo {
       float: left;
       width: 250px;
       border-right: 1px #d74949 solid;
@@ -38,7 +38,7 @@ const Header = props => {
   return (
     <header css={headerstyle} {...props}>
       <Logo type="header" />
-      <Nav gnb />
+      <Nav type="gnblist" />
       <Telbox />
     </header>
   );
