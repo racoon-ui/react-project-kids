@@ -1,48 +1,48 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
-const gnblist = css`
-  display: inline-block;
-  width: 50%;
-  text-align: center;
-  > li {
+const type = {
+  gnblist: css`
     display: inline-block;
-    margin: 0 2.7%;
-    & > a {
-      font-size: 20px;
-      color: #fff;
-      font-weight: 700;
-    }
-    &:hover {
-      .sub_manu {
-        display: block;
+    width: 50%;
+    text-align: center;
+    > li {
+      display: inline-block;
+      margin: 0 2.7%;
+      & > a {
+        font-size: 20px;
+        color: #fff;
+        font-weight: 700;
       }
-    }
-    .sub_manu {
-      display: none;
-      position: absolute;
-      background-color: #fff;
-      height: 60px;
-      top: 84px;
-      left: 0;
-      width: 100%;
-      border-bottom: 1px solid #d74949;
-      z-index: 10;
-      a {
-        display: inline-block;
-        height: 100%;
-        line-height: 60px;
-        vertical-align: top;
-        margin-right: 48px;
-        color: #000;
-        &:hover {
-          color: #d74949;
+      &:hover {
+        .sub_manu {
+          display: block;
         }
       }
-    }
-  }
-`;
-const sitemaplist = css`
+      .sub_manu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        height: 60px;
+        top: 84px;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid #d74949;
+        z-index: 10;
+        a {
+          display: inline-block;
+          height: 100%;
+          line-height: 60px;
+          vertical-align: top;
+          margin-right: 48px;
+          color: #000;
+          &:hover {
+            color: #d74949;
+          }
+        }
+      }
+    }`,
+sitemaplist:css`
   padding: 30px 0;
   border-top: 1px #3a3a3a solid;
   border-bottom: 1px #3a3a3a solid;
@@ -75,11 +75,12 @@ const sitemaplist = css`
     /* m */
     display: none;
   }
-`;
+  `
+}
 
 const Nav = props => {
   return (
-    <ul css={props.gnb ? gnblist : sitemaplist} {...props}>
+    <ul css={type[props.type]} {...props}>
       <li>
         <Link to="/info">브랜드소개</Link>
         <div className="sub_manu">
