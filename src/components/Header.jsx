@@ -32,6 +32,14 @@ const headerstyle = css`
     height: 68px;
     line-height: 68px;
   }
+  @media (max-width: 720px) {
+    /* m */
+    h1.big-logo {
+      a {
+        width: 40%;
+      }
+    }
+  }
 `;
 
 const Header = props => {
