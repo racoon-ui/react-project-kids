@@ -20,6 +20,8 @@ import Menu from './containers/Menu';
 import Found from './containers/Found';
 import Branch from './containers/Branch';
 import Cs from './containers/Cs';
+import MemberJoin from './containers/MemberJoin';
+import Login from './containers/Login';
 
 const App = () => {
   return (
@@ -34,6 +36,8 @@ const App = () => {
           <Route path="/found" component={Found} />
           <Route path="/branch" component={Branch} />
           <Route path="/cs" component={Cs} />
+          <Route path="/memberJoin" component={MemberJoin} />
+          <Route path="/login" component={Login} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

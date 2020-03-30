@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
+import MemberBox from '../components/MemberBox';
 import Logo from '../components/Logo';
 import Nav from '../components/Nav';
 import Telbox from '../components/Telbox';
@@ -44,11 +45,14 @@ const headerstyle = css`
 
 const Header = props => {
   return (
-    <header css={headerstyle} {...props}>
-      <Logo type="header" />
-      <Nav type="gnblist" />
-      <Telbox />
-    </header>
+    <div>
+      <MemberBox />
+      <header css={headerstyle} {...props}>
+        <Logo type="header" />
+        <Nav type="gnblist" />
+        <Telbox />
+      </header>
+    </div>
   );
 };
 
