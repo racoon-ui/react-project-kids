@@ -169,10 +169,10 @@ const Nav = props => {
             메뉴 <Icarrow open="on" />
           </Link>
           <div className="sub_manu">
-            <a href="/">카테고리01</a>
-            <a href="/">카테고리02</a>
-            <a href="/">카테고리03</a>
-            <a href="/">카테고리04</a>
+            <a href="/menu/menu01">카테고리01</a>
+            <a href="/menu/menu02">카테고리02</a>
+            <a href="/menu/menu03">카테고리03</a>
+            <a href="/menu/menu04">카테고리04</a>
           </div>
         </li>
         <li>
