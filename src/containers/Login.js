@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { jsx } from '@emotion/core';
 import FormStyle from '../styles/FormStyle';
+import { useForm } from 'react-hook-form';
 import { LoginValidator } from '../components/validators/LoginValidator';
 
 const Login = () => {
@@ -11,6 +12,11 @@ const Login = () => {
   });
 
   const { email, password } = form;
+
+  const { register, unregister, errors, watch, handleSubmit } = useForm({
+    mode: 'onBlur',
+    validationSchema: LoginValidator,
+  });
 
   const onChange = e => {
     const changeForm = {
@@ -57,6 +63,8 @@ const Login = () => {
       });
   };
 
+  const errrorLength = Object.keys(errors).length;
+
   return (
     <FormStyle>
       <h2>로그인</h2>
@@ -71,13 +79,15 @@ const Login = () => {
                 type="text"
                 id="email"
                 name="email"
-                className=""
+                className={`input_control ${errors.email && 'error'}`}
                 title="이메일"
                 placeholder="이메일을 적어주세요"
                 value={email}
                 onChange={onChange}
+                ref={register}
               />
             </span>
+            {errors.email && <p className="txt_errors">{errors.email.message}</p>}
           </div>
           <div className="join_row">
             <h3>
@@ -88,17 +98,19 @@ const Login = () => {
                 type="password"
                 id="password"
                 name="password"
-                className=""
+                className={`input_control ${errors.password && 'error'}`}
                 title="비밀번호"
                 placeholder="비밀번호를 적어주세요"
                 value={password}
                 onChange={onChange}
+                ref={register}
               />
             </span>
+            {errors.password && <p className="txt_errors">{errors.password.message}</p>}
           </div>
         </div>
         <div className="btn_box">
-          <button type="submit" className="btn-submit">
+          <button type="submit" className="btn-submit" ref={register} disabled={errrorLength > 0 ? true : false}>
             로그인하기
           </button>
         </div>

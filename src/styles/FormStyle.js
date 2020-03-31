@@ -23,14 +23,26 @@ const FormStyle = styled('div')`
     font-size: 14px;
     margin-bottom: 20px;
   }
-  input {
+  .input_control {
     width: 100%;
-    border: 1px solid #c9c9c9;
+    border: 2px solid #c9c9c9;
     height: 50px;
     line-height: 50px;
     padding-left: 10px;
+    border-radius: 3px;
     box-sizing: border-box;
     font-size: 14px;
+    &.error {
+      border-color: red;
+    }
+    &.ok {
+      border-color: green;
+    }
+  }
+  .txt_errors {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
   }
   .btn_box {
     margin-top: 40px;
@@ -43,6 +55,9 @@ const FormStyle = styled('div')`
       font-size: 20px;
       color: #fff;
       background: #0062a9;
+      &:disabled {
+        background: gray;
+      }
     }
   }
 `;
