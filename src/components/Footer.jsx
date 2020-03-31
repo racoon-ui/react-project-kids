@@ -3,14 +3,14 @@ import { css, jsx } from '@emotion/core';
 
 import Nav from '../components/Nav';
 import Logo from '../components/Logo';
-
+import LoginBox from './LoginBox';
 
 const footerstyle = css`
   padding-bottom: 50px;
   background: #2f2f2f;
   text-align: center;
-  .sub-logo{
-    padding:30px 0;
+  .sub-logo {
+    padding: 30px 0;
   }
   address {
     p {
@@ -42,6 +42,8 @@ const Footer = props => {
         <p>TEL : 02-714-8026 &nbsp; FAX : 02-706-8025 &nbsp; 이메일 : info@bizvalley.co.kr</p>
         <p className="fs12">Copyrights ⓒ 2017 All Rights Reserved. Designed By bizvalley.</p>
       </address>
+      <LoginBox type="in" btntext="로그인" />
+      <LoginBox type="out" btntext="로그아웃" />
     </footer>
   );
 };
