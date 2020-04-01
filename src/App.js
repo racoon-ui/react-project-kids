@@ -18,7 +18,7 @@ import Main from './containers/Main';
 import Info from './containers/Info';
 import Menu from './containers/Menu';
 import Found from './containers/Found';
-import FoundAdd from './components/FoundAdd';
+import FoundAdd from './components/found/FoundAdd';
 import Branch from './containers/Branch';
 import Cs from './containers/Cs';
 
@@ -33,7 +33,7 @@ const App = () => {
           <Route path="/info" component={Info} />
           <Route path="/menu" component={Menu} />
           <Route exact path="/found" component={Found} />
-          <Route  path="/found/add" component={FoundAdd} />
+          <Route path="/found/add" component={FoundAdd} />
           <Route path="/branch" component={Branch} />
           <Route path="/cs" component={Cs} />
           <Route component={NotFound} />

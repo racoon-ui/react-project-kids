@@ -1,13 +1,16 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
+
+import styled from '@emotion/styled';
 
 import Nav from '../components/Nav';
 import Logo from '../components/Logo';
 import LoginBox from './LoginBox';
 
-const footerstyle = css`
-  padding-bottom: 50px;
-  background: #2f2f2f;
+
+const FooterBox = styled.footer`
+  padding-bottom:${props => props.padBottom || '0' };
+  background-color:${props => props.backColor || '#000' };
   text-align: center;
   .sub-logo {
     padding: 30px 0;
@@ -27,11 +30,11 @@ const footerstyle = css`
   @media (max-width: 1024px) {
     /* m */
   }
-`;
+`
 
 const Footer = props => {
   return (
-    <footer css={footerstyle} {...props}>
+    <FooterBox backColor="#2f2f2f" padBottom="50px">
       <Nav type="sitemaplist" />
       <Logo type="footer" />
       <address>
@@ -44,7 +47,7 @@ const Footer = props => {
       </address>
       <LoginBox type="in" btntext="로그인" />
       <LoginBox type="out" btntext="로그아웃" />
-    </footer>
+    </FooterBox>
   );
 };
 

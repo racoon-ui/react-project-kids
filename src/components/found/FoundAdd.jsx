@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import store from 'store';
 
 const FoundAdd = props => {
   const { register, errors, handleSubmit } = useForm({
@@ -10,7 +11,7 @@ const FoundAdd = props => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: props.token,
+      Authorization: store.get('token'),
     },
   };
 
@@ -31,7 +32,7 @@ const FoundAdd = props => {
       },
       config,
     );
-  };
+  }
 
   const Error = ({ message }) => <div className="error-container">{message}</div>;
 
