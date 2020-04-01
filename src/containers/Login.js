@@ -34,13 +34,16 @@ const Login = () => {
         ...form,
       })
       .then(function(response) {
-        store.set('islogin', response.data.token);
-        localStorage.setItem('islogin', response.data.token);
+        store.set('token', response.data.token);
+        store.set(
+          'name',
+          response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
+        );
         alert('로그인이 완료되었습니다 :)');
         window.location = '/';
       })
       .catch(function(error) {
-        console.log(error);
+        console.log('로그인 정보가 잘못되었습니다');
       });
   };
 

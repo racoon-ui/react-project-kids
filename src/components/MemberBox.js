@@ -15,6 +15,8 @@ const memberstyle = css`
       margin: 0 6px;
       color: #000;
     }
+    .txt_hi {
+    }
   }
   @media (max-width: 1024px) {
     /* m */
@@ -41,16 +43,18 @@ const memberstyle = css`
 `;
 
 const onLogout = () => {
-  store.remove('islogin');
-  localStorage.removeItem('islogin');
+  store.remove('token');
+  store.remove('name');
+  window.location = '/';
 };
 
-const isLogin = store.get('islogin');
+let isLogin = store.get('token');
+let name = store.get('name');
 
 const LoginDiv = () => {
   return (
     <React.Fragment>
-      <span>안녕 {store.get('islogin')} 님</span>
+      <span className="txt_hi">안녕하세요 {name} 님</span>
       <Link to="/login" onClick={onLogout}>
         로그아웃
       </Link>
