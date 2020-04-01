@@ -5,6 +5,7 @@ import FormStyle from '../styles/FormStyle';
 import { useForm } from 'react-hook-form';
 import { LoginValidator } from '../components/validators/LoginValidator';
 import axios from 'axios';
+import store from 'store';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -33,7 +34,8 @@ const Login = () => {
         ...form,
       })
       .then(function(response) {
-        console.log(response);
+        store.set('islogin', response.data.token);
+        localStorage.setItem('islogin', response.data.token);
         alert('로그인이 완료되었습니다 :)');
         window.location = '/';
       })

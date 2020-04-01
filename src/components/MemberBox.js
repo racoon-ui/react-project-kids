@@ -1,6 +1,8 @@
 /** @jsx jsx */
+import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
+import store from 'store';
 
 const memberstyle = css`
   @media (min-width: 1024px) {
@@ -38,11 +40,37 @@ const memberstyle = css`
   }
 `;
 
+const onLogout = () => {
+  store.remove('islogin');
+  localStorage.removeItem('islogin');
+};
+
+const isLogin = store.get('islogin');
+
+const LoginDiv = () => {
+  return (
+    <React.Fragment>
+      <span>안녕 {store.get('islogin')} 님</span>
+      <Link to="/login" onClick={onLogout}>
+        로그아웃
+      </Link>
+    </React.Fragment>
+  );
+};
+
+const LogoutDiv = () => {
+  return (
+    <React.Fragment>
+      <Link to="/login">로그인</Link>
+      <Link to="/memberJoin">회원가입</Link>
+    </React.Fragment>
+  );
+};
+
 const MemberBox = props => {
   return (
     <div className="member_box" css={memberstyle} {...props}>
-      <Link to="/login">로그인</Link>
-      <Link to="/memberJoin">회원가입</Link>
+      {isLogin ? <LoginDiv /> : <LogoutDiv />}
     </div>
   );
 };
