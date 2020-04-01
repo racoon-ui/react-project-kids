@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css,Global, jsx } from '@emotion/core';
+import { css, Global, jsx } from '@emotion/core';
 
 /* 공통 css (전체적으로 적용하고싶은 css가있을경우 변수로 스타일 추가해서 하단에 추가해주기) */
 
@@ -137,40 +137,41 @@ const resetstyle = css`
     height: 1px;
   }
   a {
-  text-decoration: none;
-  display: inline-block;
+    text-decoration: none;
+    display: inline-block;
   }
 `;
 
 const resetstyle1 = css`
-  body{
-    font-size:12px;
-    .container{
+  body {
+    font-size: 12px;
+    .container {
       background-color: #fff;
       @media (min-width: 1024px) {
-      /* pc */
-        padding:75px 0;
+        /* pc */
+        padding: 75px 0;
       }
       @media (max-width: 1024px) {
         /* m */
-        padding:45px 0;
+        padding: 45px 0;
+      }
+      @media (max-width: 767px) {
+        /* m */
+        padding: 45px 10px;
       }
     }
   }
 `;
 
-
-
-
-const Commonstyle = (props) => {
-    return (
-      <Global
-        styles={css`
-          ${resetstyle}
-          ${resetstyle1}
-        `}
-      />
-    );
+const Commonstyle = props => {
+  return (
+    <Global
+      styles={css`
+        ${resetstyle}
+        ${resetstyle1}
+      `}
+    />
+  );
 };
 
 export default Commonstyle;

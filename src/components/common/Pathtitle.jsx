@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { MdHome } from 'react-icons/md';
+import Icon from '../common/Icon';
 
 const pathtitlestyle = css`
   text-align: center;
@@ -27,9 +27,11 @@ const pathtitlestyle = css`
   }
   @media (min-width: 1024px) {
     /* pc */
+    margin-bottom: 50px;
   }
   @media (max-width: 1024px) {
     /* m */
+    margin-bottom: 25px;
   }
 `;
 
@@ -40,7 +42,7 @@ const Pathtitle = props => {
     <div css={pathtitlestyle} {...props}>
       <h3>{array[array.length - 1]}</h3>
       <div className="sub-box">
-        <MdHome /> > {props.pathtext}
+        <Icon type="MdHome" color="#fff" /> > {props.pathtext}
       </div>
     </div>
   );

@@ -1,61 +1,46 @@
-
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { useState, useEffect } from 'react';
+
 /* data_api */
 import axios from 'axios';
 
-//<ListItem  key={article._id}>
-//{article.name}<br/>
-//주소 : {article.address}<br/>
-//전화번호 : {article.phone}<br/>
-//영업시간 : {article.hour}<br/><br/><br/>
-//</ListItem>
+import Loding from '../common/Loding';
+import ListItem from './ListItem';
 
+const ListWrap = styled.div`
+  overflow: hidden;
+  border-top: 1px #dfdfdf solid;
+  & > div {
+    border-bottom: 1px #dfdfdf solid;
+    box-sizing: border-box;
+    th {
+      width: 30%;
+    }
+    td {
+      width: 70%;
+    }
+    &:nth-of-type(odd) table {
+      border-right: 1px dashed #e0e0e0;
+    }
+  }
 
+  @media (min-width: 768px) {
+    /* pc */
+    & > div {
+      width: 50%;
+    }
+  }
+  @media (max-width: 767px) {
+    /* m */
+    & > div {
+      width: 100%;
+    }
+  }
+`;
 
-
-
-let TableBox = styled.table`
-  text-align: ${props => props.align || 'left'};
-`
-
-
-
-
-
-
-
-
-const ListItem = props =>{
-  const [listdata] = useState(props.data);
-  return (
-  <div>
-    <h3>{listdata.name}</h3>
-    <TableBox align="center">
-      <tbody>
-        <tr>
-          <td>주소</td>
-          <td>{listdata.address}</td>
-        </tr>
-        <tr>
-          <td>전화</td>
-          <td>{listdata.phone}</td>
-        </tr>
-        <tr>
-          <td>영업시간</td>
-          <td>{listdata.hour}</td>
-        </tr>
-      </tbody>
-    </TableBox>
-  </div>
-  )
-}
-
-
-
-const FoundList = (props) => {
+const FoundList = props => {
   const [foundlists, setFoundlist] = useState(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -65,33 +50,31 @@ const FoundList = (props) => {
         const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/stores');
         setFoundlist(response.data);
       } catch (e) {
-        if(e.message === 'Request failed with status code 401'){
-          alert('401에러입니다.')
+        if (e.message === 'Request failed with status code 401') {
+          alert('401에러입니다.');
         }
       }
       setLoading(false);
     };
     fetchData();
- }, []);
+  }, []);
 
   //로딩(컴포넌트로 뺄예정)
   if (loading) {
-    return <div>대기중...</div>;
+    return <Loding />;
   }
 
-//아직 articles 값이 설정되지 않았을 때
-if (!foundlists) {
-  return null;
-}
-
-
+  //아직 foundlists 값이 설정되지 않았을 때
+  if (!foundlists) {
+    return null;
+  }
 
   return (
-    <div>
+    <ListWrap>
       {foundlists.map(foundlist => (
         <ListItem key={foundlist._id} data={foundlist} />
       ))}
-    </div>
+    </ListWrap>
   );
 };
 
