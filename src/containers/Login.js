@@ -4,6 +4,7 @@ import { jsx } from '@emotion/core';
 import FormStyle from '../styles/FormStyle';
 import { useForm } from 'react-hook-form';
 import { LoginValidator } from '../components/validators/LoginValidator';
+import axios from 'axios';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -13,7 +14,7 @@ const Login = () => {
 
   const { email, password } = form;
 
-  const { register, unregister, errors, watch, handleSubmit } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     mode: 'onBlur',
     validationSchema: LoginValidator,
   });
@@ -27,33 +28,21 @@ const Login = () => {
   };
 
   const onRegister = () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-
-    var raw = JSON.stringify({
-      ...form,
-    });
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        console.log(result);
+    axios
+      .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', {
+        ...form,
+      })
+      .then(function(response) {
+        console.log(response);
         alert('로그인이 완료되었습니다 :)');
         window.location = '/';
       })
-      .catch(error => console.log('error', error));
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   const onSubmit = e => {
-    e.preventDefault();
-
     LoginValidator.validate(form)
       .then(form => {
         onRegister();
@@ -68,7 +57,7 @@ const Login = () => {
   return (
     <FormStyle>
       <h2>로그인</h2>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="row_group">
           <div className="join_row">
             <h3>
@@ -110,7 +99,13 @@ const Login = () => {
           </div>
         </div>
         <div className="btn_box">
-          <button type="submit" className="btn-submit" ref={register} disabled={errrorLength > 0 ? true : false}>
+          <button
+            type="submit"
+            name="btn_submit"
+            className="btn_submit"
+            ref={register}
+            disabled={errrorLength > 0 ? true : false}
+          >
             로그인하기
           </button>
         </div>

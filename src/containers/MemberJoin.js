@@ -4,6 +4,7 @@ import { jsx } from '@emotion/core';
 import { MemberJoinValidator } from '../components/validators/MemberJoinValidator';
 import { useForm } from 'react-hook-form';
 import FormStyle from '../styles/FormStyle';
+import axios from 'axios';
 
 const MemberJoin = () => {
   const [form, setForm] = useState({
@@ -15,7 +16,7 @@ const MemberJoin = () => {
   });
   const { email, name, phone, password, password_confirm } = form;
 
-  const { register, unregister, errors, watch, handleSubmit } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     mode: 'onBlur',
     validationSchema: MemberJoinValidator,
   });
@@ -29,28 +30,18 @@ const MemberJoin = () => {
   };
 
   const onRegister = () => {
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-
-    const raw = JSON.stringify({
-      ...form,
-    });
-
-    const requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch('https://shrouded-escarpment-56668.herokuapp.com/api/users/register', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
+    axios
+      .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/register', {
+        ...form,
+      })
+      .then(function(response) {
+        console.log(response);
         alert('회원가입이 성공적으로 완료되었습니다. 로그인을 진행해주세요 :)');
         window.location = '/login';
       })
-      .catch(error => console.log('error', error));
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   const onSubmit = () => {
@@ -169,9 +160,9 @@ const MemberJoin = () => {
         <div className="btn_box">
           <button
             type="submit"
-            className="btn-submit"
+            className="btn_submit"
             ref={register}
-            name="btnSubmit"
+            name="btn_submit"
             disabled={errrorLength > 0 ? true : false}
           >
             가입하기

@@ -45,7 +45,7 @@ const headerstyle = css`
 
 const Header = props => {
   return (
-    <div>
+    <div className="wrap_header">
       <MemberBox />
       <header css={headerstyle} {...props}>
         <Logo type="header" />
