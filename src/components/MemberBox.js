@@ -90,7 +90,7 @@ const MemberBox = props => {
         }
         @media (max-width: 1024px) {
           /* m */
-          display: ${props.lnbstate === 'off' ? 'none !important' : 'block !important'};
+          display: ${props.lnbstate === 'off' ? 'none' : 'block'};
         }
       `}
       {...props}

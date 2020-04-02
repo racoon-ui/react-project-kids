@@ -56,7 +56,6 @@ const type = {
       left: 0;
       width: 100%;
       .list {
-        display: none;
         position: absolute;
         top: 0;
         left: 0;
@@ -139,7 +138,7 @@ const Nav = props => {
           }
           @media (max-width: 1024px) {
             /* m */
-            display: ${props.lnbstate === 'off' ? 'none !important' : 'block !important'};
+            display: ${props.lnbstate === 'off' ? 'none' : 'block'};
           }
         `}
         {...props}
