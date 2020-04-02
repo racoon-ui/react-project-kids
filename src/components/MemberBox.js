@@ -22,12 +22,17 @@ const memberstyle = css`
     /* m */
     background: #fff;
     position: absolute;
-    bottom: 0;
+    top: 68px;
     left: 0;
     width: 100%;
     text-align: center;
     padding: 10px 0;
-    border-top: 1px #dfdfdf solid;
+    border-bottom: 1px #dfdfdf solid;
+    .txt_hi {
+      display: inline-block;
+      font-size: 15px;
+      margin-right: 20px;
+    }
     a {
       border: 1px solid #000;
       width: 45%;
@@ -38,6 +43,9 @@ const memberstyle = css`
       background: #fff;
       color: #000;
       font-size: 15px;
+      &.btn_logout {
+        width: 20%;
+      }
     }
   }
 `;
@@ -55,7 +63,7 @@ const LoginDiv = () => {
   return (
     <React.Fragment>
       <span className="txt_hi">안녕하세요 {name} 님</span>
-      <Link to="/login" onClick={onLogout}>
+      <Link to="/login" onClick={onLogout} className="btn_logout">
         로그아웃
       </Link>
     </React.Fragment>
@@ -73,7 +81,20 @@ const LogoutDiv = () => {
 
 const MemberBox = props => {
   return (
-    <div className="member_box" css={memberstyle} {...props}>
+    <div
+      className="member_box"
+      css={css`
+        ${memberstyle}
+        @media (min-width: 1024px) {
+          /* pc */
+        }
+        @media (max-width: 1024px) {
+          /* m */
+          display: ${props.lnbstate === 'off' ? 'none !important' : 'block !important'};
+        }
+      `}
+      {...props}
+    >
       {isLogin ? <LoginDiv /> : <LogoutDiv />}
     </div>
   );
