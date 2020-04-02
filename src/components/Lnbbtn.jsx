@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Lnbbtnstyle = css`
   position: absolute;
-  top: -65px;
+  top: 5px;
   right: 1%;
   font-size: 3em;
   color: #fff;

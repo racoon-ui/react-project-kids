@@ -1,8 +1,11 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+import { useState } from 'react';
 
+import MemberBox from '../components/MemberBox';
 import Logo from '../components/Logo';
 import Nav from '../components/Nav';
+import Lnbbtn from './Lnbbtn';
 import Telbox from '../components/Telbox';
 
 const headerstyle = css`
@@ -43,12 +46,20 @@ const headerstyle = css`
 `;
 
 const Header = props => {
+  const [lnbstate, setLnbstate] = useState('off');
+  const icOpen = () => {
+    lnbstate === 'on' ? setLnbstate('off') : setLnbstate('on');
+  };
   return (
-    <header css={headerstyle} {...props}>
-      <Logo type="header" />
-      <Nav type="gnblist" />
-      <Telbox />
-    </header>
+    <div className="wrap_header">
+      <MemberBox lnbstate={lnbstate} />
+      <header css={headerstyle} {...props}>
+        <Logo type="header" />
+        <Nav type="gnblist" lnbstate={lnbstate} />
+        <Telbox />
+        <Lnbbtn listopen={lnbstate} onClick={icOpen} />
+      </header>
+    </div>
   );
 };
 
