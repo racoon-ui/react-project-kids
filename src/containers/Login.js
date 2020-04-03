@@ -13,6 +13,8 @@ const Login = () => {
     password: '',
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { email, password } = form;
 
   const { register, errors, handleSubmit } = useForm({
@@ -34,13 +36,14 @@ const Login = () => {
         ...form,
       })
       .then(function(response) {
+        setIsLoading(true);
         store.set('token', response.data.token);
         store.set(
           'name',
           response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
         );
         alert('로그인이 완료되었습니다 :)');
-        window.location = '/';
+        // window.location = '/';
       })
       .catch(function(error) {
         console.log('로그인 정보가 잘못되었습니다');
@@ -62,6 +65,7 @@ const Login = () => {
   return (
     <FormStyle>
       <h2>로그인</h2>
+      {isLoading ? 'dddd' : '3333'}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="row_group">
           <div className="join_row">
