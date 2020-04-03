@@ -145,21 +145,6 @@ const resetstyle = css`
 const resetstyle1 = css`
   body {
     font-size: 12px;
-    .container {
-      background-color: #fff;
-      @media (min-width: 1024px) {
-        /* pc */
-        padding: 75px 0;
-      }
-      @media (max-width: 1024px) {
-        /* m */
-        padding: 45px 0;
-      }
-      @media (max-width: 767px) {
-        /* m */
-        padding: 45px 10px;
-      }
-    }
   }
 `;
 

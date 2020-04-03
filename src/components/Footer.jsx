@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import Nav from '../components/Nav';
 import Logo from '../components/Logo';
-import LoginBox from './LoginBox';
+
 
 
 const FooterBox = styled.footer`
@@ -45,8 +45,6 @@ const Footer = props => {
         <p>TEL : 02-714-8026 &nbsp; FAX : 02-706-8025 &nbsp; 이메일 : info@bizvalley.co.kr</p>
         <p className="fs12">Copyrights ⓒ 2017 All Rights Reserved. Designed By bizvalley.</p>
       </address>
-      <LoginBox type="in" btntext="로그인" />
-      <LoginBox type="out" btntext="로그아웃" />
     </FooterBox>
   );
 };

@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 
-const DIV = props => (
+
+const BOX = props => (
   <div
     css={css`
       ${props.float === 'left' ? 'float:left;' : ''};
@@ -38,4 +39,24 @@ const TABLE = props => (
   </table>
 );
 
-export { DIV, TABLE };
+
+
+
+const CONTAINER = props => (
+  <div
+    className="container"
+    css={css`
+      padding: ${props.padding || '10px'};
+    `}
+    {...props}
+  >
+    {props.children}
+  </div>
+);
+
+
+
+
+
+
+export { BOX, TABLE, CONTAINER };

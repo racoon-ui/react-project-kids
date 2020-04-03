@@ -7,7 +7,15 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Loding from '../common/Loding';
-import ListItem from './ListItem';
+
+
+
+
+import Icon from '../common/Icon';
+import { TABLE,BOX } from '../common/Tag';
+
+
+
 
 const ListWrap = styled.div`
   overflow: hidden;
@@ -41,14 +49,14 @@ const ListWrap = styled.div`
 `;
 
 const FoundList = props => {
-  const [foundlists, setFoundlist] = useState(null);
+  const [foundlists, setFoundlists] = useState(null);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/stores');
-        setFoundlist(response.data);
+        setFoundlists(response.data);
       } catch (e) {
         if (e.message === 'Request failed with status code 401') {
           alert('401에러입니다.');
@@ -72,7 +80,34 @@ const FoundList = props => {
   return (
     <ListWrap>
       {foundlists.map(foundlist => (
-        <ListItem key={foundlist._id} data={foundlist} />
+        <BOX key={foundlist._id}>
+          <TABLE align="left" padding="7px 5px" titlesize="24px" titlecolor="#d13030" subsize="16px">
+            <caption>{foundlist.name}</caption>
+            <tbody>
+              <tr>
+                <th>
+                  <Icon type="IoMdPin" color="#d13030" />
+                  주소
+                </th>
+                <td>{foundlist.address}</td>
+              </tr>
+              <tr>
+                <th>
+                  <Icon type="MdPhone" color="#d13030" />
+                  전화
+                </th>
+                <td>{foundlist.phone}</td>
+              </tr>
+              <tr>
+                <th>
+                  <Icon type="IoIosTime" color="#d13030" />
+                  영업시간
+                </th>
+                <td>{foundlist.hour}</td>
+              </tr>
+            </tbody>
+          </TABLE>
+        </BOX>
       ))}
     </ListWrap>
   );
