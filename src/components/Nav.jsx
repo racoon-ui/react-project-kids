@@ -1,8 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Lnbbtn from './Lnbbtn';
 import Icarrow from './Icarrow';
 
 const type = {
@@ -54,11 +52,10 @@ const type = {
     @media (max-width: 1024px) {
       /* m */
       position: absolute;
-      top: 68px;
+      top: 121px;
       left: 0;
       width: 100%;
       .list {
-        display: none;
         position: absolute;
         top: 0;
         left: 0;
@@ -131,15 +128,8 @@ const type = {
 };
 
 const Nav = props => {
-  const [lnbstate, setLnbstate] = useState('off');
-  const icOpen = () => {
-    lnbstate === 'on' ? setLnbstate('off') : setLnbstate('on');
-  };
-
   return (
     <div css={type[props.type]} {...props}>
-      <Lnbbtn listopen={lnbstate} onClick={icOpen} />
-
       <ul
         className="list"
         css={css`
@@ -148,7 +138,7 @@ const Nav = props => {
           }
           @media (max-width: 1024px) {
             /* m */
-            display: ${lnbstate === 'off' ? 'none !important' : 'block !important'};
+            display: ${props.lnbstate === 'off' ? 'none' : 'block'};
           }
         `}
         {...props}
@@ -169,10 +159,10 @@ const Nav = props => {
             메뉴 <Icarrow open="on" />
           </Link>
           <div className="sub_manu">
-            <a href="/">카테고리01</a>
-            <a href="/">카테고리02</a>
-            <a href="/">카테고리03</a>
-            <a href="/">카테고리04</a>
+            <a href="/menu/menu01">카테고리01</a>
+            <a href="/menu/menu02">카테고리02</a>
+            <a href="/menu/menu03">카테고리03</a>
+            <a href="/menu/menu04">카테고리04</a>
           </div>
         </li>
         <li>
