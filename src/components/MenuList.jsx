@@ -4,19 +4,12 @@ import { useState, useEffect } from 'react';
 import MenuItem from './MenuItem';
 import axios from 'axios';
 
-import usePromise from './products/usePromise';
-import ProductsForm from './products/ProductsForm';
+// import usePromise from './products/usePromise';
 
 const MenuListBlock = css`
-  box-sizing: border-box;
-  padding-bottom: 3rem;
-  width: 768px;
-  margin: 0 auto;
-  margin-top: 2rem;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  > ul {
+    overflow: hidden;
+    margin-left: -1.5%;
   }
 `;
 
@@ -50,12 +43,12 @@ const MenuList = () => {
   return (
     <div>
       <div css={MenuListBlock}>
-        {menus.map((menu, index) => (
-          <MenuItem key={index} data={menu} />
-        ))}
+        <ul>
+          {menus.map((menu, index) => (
+            <MenuItem key={index} data={menu} />
+          ))}
+        </ul>
       </div>
-      <button>상품등록</button>
-      <ProductsForm />
     </div>
   );
 };
