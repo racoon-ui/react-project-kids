@@ -21,10 +21,17 @@ const menuList = css`
   p {
     display: block;
   }
+  .delBtn {
+    display: block;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+  }
 `;
 
-const MenuItem = menu => {
+const MenuItem = (menu) => {
   const [MenuInfo] = useState(menu.data);
+  const { onRemove } = menu;
   return (
     <li css={menuList}>
       <Link to="/">
@@ -35,6 +42,9 @@ const MenuItem = menu => {
         <p>메뉴가격 : {MenuInfo.price}</p>
         <p>메뉴상세정보 : {MenuInfo.description}</p>
       </Link>
+      <button className="delBtn" onClick={() => onRemove(MenuInfo._id)}>
+        상품삭제
+      </button>
     </li>
   );
 };

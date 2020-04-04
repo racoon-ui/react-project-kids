@@ -3,7 +3,6 @@ import { css, jsx } from '@emotion/core';
 import { useState, useEffect } from 'react';
 import MenuItem from './MenuItem';
 import axios from 'axios';
-
 // import usePromise from './products/usePromise';
 
 const MenuListBlock = css`
@@ -16,6 +15,7 @@ const MenuListBlock = css`
 const MenuList = () => {
   const [menus, setMenus] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -40,12 +40,19 @@ const MenuList = () => {
     return null;
   }
 
+  const onRemove = (_id) => {
+    setMenus(menus.filter((menu) => menu._id !== _id));
+    console.log('삭제되었습니다.');
+    console.log(menus.length);
+    alert('삭제되었습니다.');
+  };
+
   return (
     <div>
       <div css={MenuListBlock}>
         <ul>
-          {menus.map((menu, index) => (
-            <MenuItem key={index} data={menu} />
+          {menus.map((menu) => (
+            <MenuItem key={menu._id} data={menu} onRemove={onRemove} />
           ))}
         </ul>
       </div>
