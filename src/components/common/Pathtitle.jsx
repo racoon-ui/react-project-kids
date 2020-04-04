@@ -35,7 +35,7 @@ const pathtitlestyle = css`
   }
 `;
 
-const Pathtitle = props => {
+const Pathtitle = (props) => {
   const array = props.pathtext.split('>');
 
   return (

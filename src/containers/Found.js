@@ -1,4 +1,3 @@
-
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
@@ -6,7 +5,7 @@ import { jsx } from '@emotion/core';
 import Subtitle from '../components/Subtitle';
 import Pathtitle from '../components/common/Pathtitle';
 import FoundList from '../components/found/FoundList';
-import {CONTAINER} from '../components/common/Tag';
+import { CONTAINER } from '../components/common/Tag';
 
 const Found = () => {
   return (
@@ -15,7 +14,7 @@ const Found = () => {
 
       <CONTAINER padding="70px 0">
         <Pathtitle pathtext="지점소개 > 정보페이지" />
-        <FoundList  />
+        <FoundList />
       </CONTAINER>
     </div>
   );

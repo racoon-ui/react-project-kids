@@ -1,21 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 
-
-const BOX = props => (
-  <div
-    css={css`
-      ${props.float === 'left' ? 'float:left;' : ''};
-      width: ${props.width || ''};
-      padding: ${props.padding || '5px'};
-    `}
-    {...props}
-  >
-    {props.children}
-  </div>
-);
-
-const TABLE = props => (
+const TABLE = (props) => (
   <table
     css={css`
       text-align: ${props.align || 'left'};
@@ -27,10 +13,12 @@ const TABLE = props => (
         color: ${props.titlecolor || '#333'};
       }
       th {
-        padding: ${props.padding || '5px'};
+        height: ${props.row_height || '5px'};
+        vertical-align: middle;
       }
       td {
-        padding: ${props.padding || '5px'};
+        height: ${props.row_height || '5px'};
+        vertical-align: middle;
       }
     `}
     {...props}
@@ -39,10 +27,7 @@ const TABLE = props => (
   </table>
 );
 
-
-
-
-const CONTAINER = props => (
+const CONTAINER = (props) => (
   <div
     className="container"
     css={css`
@@ -54,9 +39,32 @@ const CONTAINER = props => (
   </div>
 );
 
+const LISTWRAP = (props) => (
+  <div
+    className="listwrap"
+    css={css`
+      &:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+    `}
+    {...props}
+  >
+    {props.children}
+  </div>
+);
 
+const LISTITEM = (props) => (
+  <div
+    className="listitem"
+    css={css`
+      ${props.float === 'left' ? 'float:left;' : ''}
+    `}
+    {...props}
+  >
+    {props.children}
+  </div>
+);
 
-
-
-
-export { BOX, TABLE, CONTAINER };
+export { TABLE, CONTAINER, LISTWRAP, LISTITEM };
