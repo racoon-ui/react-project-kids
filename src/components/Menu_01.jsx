@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import MenuList from './MenuList';
 
 const subConainter = css`
-  padding: 50px 0;
+  padding: 50px;
   position: relative;
 `;
 const subTitle = css`
