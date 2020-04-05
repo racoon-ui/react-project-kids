@@ -32,7 +32,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2I3ZmU5NWMwYTAwMTdkOGRkN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTU4NDk1NDQ4OH0.QZAtwwsUHHwakkQ3lZY8qxeuy3i5QBERlwYsmue58hg
 
 {
-	"name": "하하하",
+	"name": "오세천",
 	"address": "서울지역",
 	"phone": "02-7777-6666",
 	"hour": "08:00~21:00",
@@ -52,7 +52,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2I3Z
 {
   "name": "hihihi",
   "phone": "010-5550-8888",
-	"address": "서울시 용산구 원효로 222"
+"address": "서울시 용산구 원효로 222"
 }
 
 ###

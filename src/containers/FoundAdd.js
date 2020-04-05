@@ -1,33 +1,56 @@
 /** @jsx jsx */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useForm } from 'react-hook-form';
 import FormStyle from '../styles/FormStyle';
 import axios from 'axios';
 import store from 'store';
+//import { array } from 'yup';
 const MemberJoin = () => {
   const [form, setForm] = useState({
     name: '',
     address: '',
     phone: '',
     hour: '',
-    facilities: [{ facilities1: '주차가능', facilities2: '놀이방', facilities3: '단체', facilities4: '와이파이' }],
+    facilities: [],
     location: {
       type: 'Point',
-      coordinates: ['', ''],
+      coordinates: [],
     },
   });
-  const { name, address, phone, hour, facilities1, facilities2, facilities3, facilities4, location } = form;
+  const { name, address, phone, hour } = form;
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onBlur',
   });
 
   const onChange = (e) => {
+    //console.log(e.target.value);
     const changeForm = {
       ...form,
       [e.target.name]: e.target.value,
     };
+    if (e.target.name === 'coordinates[0]') {
+      changeForm.location.coordinates[0] = e.target.value;
+    }
+    if (e.target.name === 'coordinates[1]') {
+      changeForm.location.coordinates[1] = e.target.value;
+    }
+
+    if (e.target.className === 'facilities') {
+      //array.forEach((element) => {});
+      changeForm.facilities = [];
+      const t = document.getElementsByClassName('facilities');
+      // console.log(t);
+      Array.prototype.forEach.call(t, function (el) {
+        if (el.checked) changeForm.facilities.push(el.value);
+      });
+
+      //if (e.target.checked) changeForm.facilities.push(e.target.value);
+      //if (!e.target.checked) changeForm.facilities[e.target.name] = '';
+    }
+
+    //console.log(changeForm);
     setForm(changeForm);
   };
 
@@ -48,7 +71,7 @@ const MemberJoin = () => {
         config,
       )
       .then(function (response) {
-        console.log(response);
+        //console.log(response);
         alert('지점등록이 되었습니다.');
         //window.location = '/found';
       })
@@ -61,7 +84,7 @@ const MemberJoin = () => {
     onRegister(data);
   };
 
-  const Error = ({ message }) => <div className="error-container">{message}</div>;
+  //const Error = ({ message }) => <div className="error-container">{message}</div>;
 
   const errrorLength = Object.keys(errors).length > 0 ? true : false;
 
@@ -182,8 +205,9 @@ const MemberJoin = () => {
                 type="checkbox"
                 id="facilities1"
                 name="facilities1"
+                className="facilities"
                 title="지점 전화번호"
-                value={facilities1}
+                value="주차"
                 onChange={onChange}
                 ref={register}
               />
@@ -192,8 +216,9 @@ const MemberJoin = () => {
                 type="checkbox"
                 id="facilities2"
                 name="facilities2"
+                className="facilities"
                 title="지점 전화번호"
-                value={facilities2}
+                value="놀이방"
                 onChange={onChange}
                 ref={register}
               />
@@ -203,7 +228,8 @@ const MemberJoin = () => {
                 id="facilities3"
                 name="facilities3"
                 title="지점 전화번호"
-                value={facilities3}
+                className="facilities"
+                value="단체"
                 onChange={onChange}
                 ref={register}
               />
@@ -213,7 +239,8 @@ const MemberJoin = () => {
                 id="facilities4"
                 name="facilities4"
                 title="지점 전화번호"
-                value={facilities4}
+                className="facilities"
+                value="와아파이"
                 onChange={onChange}
                 ref={register}
               />
@@ -227,7 +254,7 @@ const MemberJoin = () => {
               <input
                 type="text"
                 id="coordinates"
-                name={`location.coordinates`}
+                name={`coordinates[0]`}
                 className={`input_control ${errors.coordinates && 'error'}`}
                 title="지도좌표"
                 placeholder="좌표를 입력해주세요"
@@ -243,7 +270,7 @@ const MemberJoin = () => {
               <input
                 type="text"
                 id="coordinates"
-                name={`location.coordinates[1]`}
+                name={`coordinates[1]`}
                 className={`input_control ${errors.coordinates && 'error'}`}
                 title="지도좌표"
                 placeholder="좌표를 입력해주세요"
