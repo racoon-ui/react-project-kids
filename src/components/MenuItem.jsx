@@ -47,7 +47,7 @@ const MenuItem = (menu) => {
         <p>카테고리 : {MenuInfo.category}</p>
         <p>메뉴이름 : {MenuInfo.name}</p>
         <p>메뉴상세 : {MenuInfo.summary}</p>
-        <p className="menuPrice">메뉴가격 : {MenuInfo.price}</p>
+        <p className="menuPrice">메뉴가격 : {MenuInfo.price}원</p>
         <p>메뉴상세정보 : {MenuInfo.description}</p>
       </a>
 
@@ -60,7 +60,7 @@ const MenuItem = (menu) => {
         <p>카테고리 : {MenuInfo.category}</p>
         <p>메뉴이름 : {MenuInfo.name}</p>
         <p>메뉴상세 : {MenuInfo.summary}</p>
-        <p className="menuPrice">메뉴가격 : {MenuInfo.price}</p>
+        <p className="menuPrice">메뉴가격 : {MenuInfo.price}원</p>
         <p>메뉴상세정보 : {MenuInfo.description}</p>
       </ProdcutsModal>
     </li>

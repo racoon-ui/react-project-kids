@@ -43,6 +43,7 @@ const ProductsAddForm = css`
     font-size: 15px;
     border: 1px solid #d1302f;
     box-sizing: border-box;
+    text-indent: 10px;
     &:focus {
       background: #ffdfdf;
     }
