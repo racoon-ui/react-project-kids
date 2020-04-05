@@ -38,27 +38,73 @@ const FoundListstyle = css`
   }
 `;
 
-const FoundList = (props) => {
-  const [foundlists, setFoundlists] = useState(null);
-  const [loading, setLoading] = useState(false);
+const Searchstyle = css`
+  margin: 0 auto;
+  width: 1080px;
+  border: 1px #e8e8e8 solid;
+  box-sizing: border-box;
+  padding: 28px 0;
+  background-color: #f4f4f4;
+  > div {
+    margin: 0 auto;
+    width: 600px;
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+  input {
+    float: left;
+    width: 83%;
+    border: 2px solid #c9c9c9;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  button {
+    float: right;
+    width: 15%;
+    height: 50px;
+    box-sizing: border-box;
+  }
 
+  @media (min-width: 768px) {
+    /* pc */
+  }
+  @media (max-width: 767px) {
+    /* m */
+  }
+`;
+const FoundList = (props) => {
+  const [foundlists, setFoundlists] = useState(null); //지점 리스트로 쓸 데이터
+  const [foundlistsBackup, setFoundlistsBackup] = useState(null); //지점 총 데이터 보관용
+  const [loading, setLoading] = useState(false);
   const [inputText, setInputText] = useState('');
 
   const onChange = (e) => {
     setInputText(e.target.value);
   };
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: store.get('token'),
-    },
+  const onSearch = (id) => {
+    //검색창
+    const nextNames = foundlistsBackup.filter((item) => item.name.indexOf(id) !== -1);
+    setFoundlists(nextNames);
   };
 
   const onRemove = (id) => {
+    //지점 리스트 삭제 기능
     if (window.confirm('정말 삭제할꺼야?')) {
       axios
-        .delete(`https://shrouded-escarpment-56668.herokuapp.com/api/stores/${id}`, config)
+        .delete(`https://shrouded-escarpment-56668.herokuapp.com/api/stores/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: store.get('token'),
+          },
+        })
         .then(function (response) {
           const nextNames = foundlists.filter((name) => name._id !== id);
           setFoundlists(nextNames);
@@ -70,25 +116,32 @@ const FoundList = (props) => {
     }
   };
 
-  const onSearch = (id) => {
-    //console.log(nextName);
-    const nextNames = foundlists.filter((item) => item.name.indexOf(id) !== -1);
-    // console.log(nextNames);
-    setFoundlists(nextNames);
+  const onHello = (aa) => {
+    setFoundlists(aa[0]);
+    console.log(aa);
+    //setFoundlists(tmp[0]);
   };
 
-  const onPagging = (num) => {
-    console.log(num);
-    let data = [];
-    if (num === 1) {
-      data = foundlists.slice(0, 3);
-    } else if (num === 2) {
-      data = foundlists.slice(3, 6);
-    } else if (num === 3) {
-      data = foundlists.slice(6, 9);
+  const Pagging = (num) => {
+    let dfff = 3;
+    let len = foundlistsBackup.length;
+    let cnt = Math.floor(len / dfff);
+    let aa = [];
+    let elements = [];
+
+    for (var i = 0; i <= cnt; i++) {
+      aa.push(foundlistsBackup.slice(dfff - 3, dfff));
+      dfff += 3;
+      elements.push(
+        <button href="" key={i} onClick={(e) => onHello(aa)}>
+          {i}
+        </button>,
+      );
     }
-    setFoundlists(data);
-    console.log(data);
+
+    console.log(aa);
+
+    return <div>{elements}</div>;
   };
 
   useEffect(() => {
@@ -97,6 +150,7 @@ const FoundList = (props) => {
       try {
         const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/stores');
         setFoundlists(response.data);
+        setFoundlistsBackup(response.data);
         //console.log(response.data);
       } catch (e) {
         if (e.message === 'Request failed with status code 401') {
@@ -120,13 +174,14 @@ const FoundList = (props) => {
 
   return (
     <Fragment>
-      <div className="a">
-        <input type="text" placeholder="국가명" value={inputText} onChange={onChange} />
-        <button onClick={(e) => onSearch(inputText)}>검색</button>
+      <div css={Searchstyle}>
+        <div>
+          <input type="text" placeholder="지점명을 입력하세요" value={inputText} onChange={onChange} />
+          <button onClick={(e) => onSearch(inputText)}>검색</button>
+        </div>
       </div>
-
+      <Pagging />
       <LISTWRAP css={FoundListstyle}>
-        {console.log(foundlists.length)}
         {foundlists.map((foundlist) => (
           <LISTITEM float="left" key={foundlist._id}>
             <TABLE align="left" row_height="30px" titlesize="24px" titlecolor="#333" subsize="16px">
@@ -174,14 +229,14 @@ const FoundList = (props) => {
         <button onClick={(e) => onPagging((foundlists.length / 3) * 3)}>3</button>
         <br />
       </div> */}
-      <div>
+      {/* <div>
         <button onClick={(e) => onPagging(1)}>1</button>
         <br />
         <button onClick={(e) => onPagging(2)}>2</button>
         <br />
         <button onClick={(e) => onPagging(3)}>3</button>
         <br />
-      </div>
+      </div> */}
     </Fragment>
   );
 };
