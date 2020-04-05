@@ -62,5 +62,5 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2I3ZmU5NWMwYTAwMTdkOGRkN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTU4NDk1NDQ4OH0.QZAtwwsUHHwakkQ3lZY8qxeuy3i5QBERlwYsmue58hg
 ###
 //하나선택
-GET https://shrouded-escarpment-56668.herokuapp.com/api/stores/5e7855c482e3d031cd859d04
+GET https://shrouded-escarpment-56668.herokuapp.com/api/stores/5e89853d59223300177aea70
 Content-Type: application/json
