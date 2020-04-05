@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useState } from 'react';
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductsFormValidator } from './ProductsFormValidator';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import store from 'store';
 const ProductsAddForm = css`
   padding: 50px 0;
   margin: 0 auto;
-  width: 400px;
+  width: 450px;
   h3 {
     text-align: center;
     font-size: 30px;
@@ -76,6 +76,13 @@ function ProductsForm() {
 
   const { category, name, image, summary, price, description } = form;
 
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: store.get('token'),
+    },
+  };
+
   const { register, errors } = useForm({
     mode: 'onBlur',
     validationSchema: ProductsFormValidator,
@@ -92,16 +99,12 @@ function ProductsForm() {
   const onSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('https://shrouded-escarpment-56668.herokuapp.com/api/products', form, {
-        headers: { 'Content-Type': 'application/json', Authorization: store.get('token') },
-      })
+      .post('https://shrouded-escarpment-56668.herokuapp.com/api/products', form, config)
       .then(function (response) {
-        console.log(response);
         alert('성공적으로 상품이 생성되었습니다');
         window.location = '/menu';
       })
       .catch(function (error) {
-        console.log(error);
         alert('실패했습니다.');
       });
   };
@@ -176,7 +179,7 @@ function ProductsForm() {
             메뉴가격
           </label>
           <input
-            type="text"
+            type="number"
             className={`form-control ${errors.price && 'error'}`}
             id="price"
             name="price"
