@@ -2,6 +2,7 @@
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
 import ProdcutsModal from './products/ProductsModal';
+import { Link } from 'react-router-dom';
 
 const MenuItem = (menu) => {
   const [show, setShow] = useState(false);
@@ -9,7 +10,7 @@ const MenuItem = (menu) => {
   const { onRemove } = menu;
   return (
     <li>
-      <a href="#;" onClick={() => setShow(true)}>
+      <Link to={`menu/${MenuInfo._id}`}>
         <div className="menuImg">
           <img src={MenuInfo.image} alt={MenuInfo.name} />
         </div>
@@ -22,7 +23,7 @@ const MenuItem = (menu) => {
           </p>
           <p>메뉴상세정보 : {MenuInfo.description}</p>
         </div>
-      </a>
+      </Link>
 
       <button className="openBtnModal" onClick={() => setShow(true)}>
         상품상세
