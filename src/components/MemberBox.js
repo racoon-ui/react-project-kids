@@ -58,7 +58,7 @@ const onLogout = () => {
 
 let name = store.get('name');
 
-const MemberBox = props => {
+const MemberBox = (props) => {
   return (
     <div
       className="member_box"
@@ -73,9 +73,9 @@ const MemberBox = props => {
     >
       <CheckLogin login>
         <span className="txt_hi">안녕하세요 {name} 님</span>
-        <Link to="/login" onClick={onLogout} className="btn_logout">
+        <a href="/" onClick={onLogout} className="btn_logout">
           로그아웃
-        </Link>
+        </a>
       </CheckLogin>
 
       <CheckLogin logout>
