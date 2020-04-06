@@ -74,7 +74,6 @@ const MenuList = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = menus.slice(indexOfFirstPost, indexOfLastPost);
   console.log(currentPosts);
-
   // 페이지 전환
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 

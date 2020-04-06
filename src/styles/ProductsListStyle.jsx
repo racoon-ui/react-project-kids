@@ -17,7 +17,7 @@ const ProductsListStyle = styled('div')`
       &:hover {
         border: 1px solid #d74849;
         transition: all 0.5s ease-in-out;
-        > img {
+        img {
           transform: scale(1.08);
           transition: all 0.5s ease-in-out;
         }
