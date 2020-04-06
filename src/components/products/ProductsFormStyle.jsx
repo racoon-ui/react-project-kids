@@ -40,8 +40,6 @@ const ProductsFormStyle = styled('div')`
     line-height: 20px;
     font-size: 15px;
     box-sizing: border-box;
-    text-indent: 10px;
-
     display: block;
     width: 100%;
     border: 0;
