@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AuthRoute from './AuthRoute';
+import AuthRoute from './components/AuthRoute';
 
 /* style */
 import './styles/common.scss';
@@ -23,10 +23,6 @@ import Branch from './containers/Branch';
 import Cs from './containers/Cs';
 import MemberJoin from './containers/MemberJoin';
 import Login from './containers/Login';
-import store from 'store';
-
-let authenticated = store.get('token');
-let email = store.get('name');
 
 const App = () => {
   return (
@@ -40,7 +36,7 @@ const App = () => {
           <Route path="/menu" component={Menu} />
           <Route path="/found" component={Found} />
           <Route path="/branch" component={Branch} />
-          <AuthRoute authenticated={authenticated} path="/cs" render={(props) => <Cs email={email} {...props} />} />
+          <AuthRoute path="/cs" component={Cs} />
           <Route path="/memberJoin" component={MemberJoin} />
           <Route path="/login" component={Login} />
           <Route component={NotFound} />
