@@ -1,69 +1,12 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
-import styled from '@emotion/styled';
+import { jsx } from '@emotion/core';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductsFormValidator } from './ProductsFormValidator';
 import { Link } from 'react-router-dom';
+import ProductsFormStyle from './ProductsFormStyle';
 import axios from 'axios';
 import store from 'store';
-
-const ProductsAddForm = css`
-  padding: 50px 0;
-  margin: 0 auto;
-  width: 450px;
-  h3 {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
-    font-weight: 600;
-  }
-  .form-group {
-    margin-top: 20px;
-    overflow: hidden;
-    a {
-      display: inline-block;
-      width: 48%;
-      margin-left: 4%;
-      button {
-        width: 100%;
-      }
-    }
-  }
-  .control-label {
-    display: block;
-    font-size: 15px;
-    line-height: 30px;
-    font-weight: 600;
-  }
-  .form-control {
-    width: 100%;
-    height: 40px;
-    line-height: 20px;
-    font-size: 15px;
-    border: 1px solid #d1302f;
-    box-sizing: border-box;
-    text-indent: 10px;
-    &:focus {
-      background: #ffdfdf;
-    }
-  }
-  .error-container {
-    line-height: 24px;
-    color: #d1302f;
-  }
-`;
-const Button = styled.button`
-  float: left;
-  width: 48%;
-  height: 50px;
-  font-weight: 600;
-  border-radius: 5px;
-  font-size: 18px;
-  background: ${(props) => (props.goBack ? '#000' : '#d1302f')};
-  color: ${(props) => (props.goBack ? '#fff' : '#fff')};
-  border: none;
-`;
 
 function ProductsForm() {
   const [form, setForm] = useState({
@@ -112,12 +55,12 @@ function ProductsForm() {
   const Error = ({ message }) => <div className="error-container">{message}</div>;
 
   return (
-    <div css={ProductsAddForm}>
+    <ProductsFormStyle>
       <h3>상품등록</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="category" className="control-label">
-            카테고리
+            카테고리 <em>*</em>
           </label>
           <input
             type="text"
@@ -132,7 +75,7 @@ function ProductsForm() {
         </div>
         <div className="form-group">
           <label htmlFor="name" className="control-label">
-            메뉴이름
+            메뉴이름 <em>*</em>
           </label>
           <input
             type="text"
@@ -147,7 +90,7 @@ function ProductsForm() {
         </div>
         <div className="form-group">
           <label htmlFor="image" className="control-label">
-            메뉴이미지
+            메뉴이미지 <em>*</em>
           </label>
           <input
             type="text"
@@ -162,7 +105,7 @@ function ProductsForm() {
         </div>
         <div className="form-group">
           <label htmlFor="summary" className="control-label">
-            메뉴상세
+            메뉴상세 <em>*</em>
           </label>
           <input
             type="text"
@@ -177,7 +120,7 @@ function ProductsForm() {
         </div>
         <div className="form-group">
           <label htmlFor="price" className="control-label">
-            메뉴가격
+            메뉴가격 <em>*</em>
           </label>
           <input
             type="number"
@@ -192,7 +135,7 @@ function ProductsForm() {
         </div>
         <div className="form-group">
           <label htmlFor="description" className="control-label">
-            메뉴상세정보
+            메뉴상세정보 <em>*</em>
           </label>
           <input
             type="text"
@@ -205,16 +148,17 @@ function ProductsForm() {
           />
           {errors.description && <Error message={errors.description.message} />}
         </div>
+        <span className="infoText">* 항목은 필수 입력입니다.</span>
         <div className="form-group">
-          <Button type="submit" className="btn btn-submit">
+          <button type="submit" className="btn btn-submit">
             상품생성
-          </Button>
+          </button>
           <Link to="/menu">
-            <Button goBack>뒤로가기</Button>
+            <button className="goBack">뒤로가기</button>
           </Link>
         </div>
       </form>
-    </div>
+    </ProductsFormStyle>
   );
 }
 

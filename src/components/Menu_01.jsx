@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import MenuList from './MenuList';
 
 const subConainter = css`
-  padding: 50px;
+  padding: 50px 100px;
   position: relative;
 `;
 const subTitle = css`
@@ -14,7 +14,6 @@ const subTitle = css`
   text-align: center;
   font-weight: 600;
 `;
-
 const Button = styled.button`
   position: absolute;
   top: 10px;
@@ -23,6 +22,7 @@ const Button = styled.button`
   height: 30px;
   font-size: 15px;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const Menu_01 = () => {
