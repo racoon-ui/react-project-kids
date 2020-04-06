@@ -80,7 +80,8 @@ const Searchstyle = css`
   }
 `;
 const FoundList = (props) => {
-  const [foundlists, setFoundlists] = useState(null); //지점 리스트로 쓸 데이터
+  const resultnum = [];
+  const [foundlists, setFoundlists] = useState(resultnum); //지점 리스트로 쓸 데이터
   const [foundlistsBackup, setFoundlistsBackup] = useState(null); //지점 총 데이터 보관용
   const [loading, setLoading] = useState(false);
   const [inputText, setInputText] = useState('');
@@ -116,42 +117,52 @@ const FoundList = (props) => {
     }
   };
 
-  const onHello = (aa) => {
-    setFoundlists(aa[0]);
-    console.log(aa);
-    //setFoundlists(tmp[0]);
-  };
+  
 
-  const Pagging = (num) => {
-    let dfff = 3;
-    let len = foundlistsBackup.length;
-    let cnt = Math.floor(len / dfff);
-    let aa = [];
-    let elements = [];
+  const DataDivision = (aa,bb) => {
+    if(aa.length > bb){
+      let cntnum = Math.floor(aa.length / bb);
+      let div = bb;
+      for (let i = 0; i <= cntnum; i++) {
+        resultnum.push(aa.slice(div - bb, div));
+        div += bb;
+      }
+    };
+    console.log(foundlists);  
+  }
 
-    for (var i = 0; i <= cnt; i++) {
-      aa.push(foundlistsBackup.slice(dfff - 3, dfff));
-      dfff += 3;
-      elements.push(
-        <button href="" key={i} onClick={(e) => onHello(aa)}>
-          {i}
-        </button>,
-      );
-    }
+  const Pagging = (props) =>{
 
-    console.log(aa);
+    const onPagging = (key) => {
+      setFoundlists(key)
+    };
+    return (
+      <div>
+        {resultnum.map((results,index) => (
+          <button href="" key={index} onClick={() => onPagging(results)}>
+          {index+1}
+          </button>
+        ))}
+      </div>
+    );
+  }
 
-    return <div>{elements}</div>;
-  };
+
+
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/stores');
-        setFoundlists(response.data);
-        setFoundlistsBackup(response.data);
-        //console.log(response.data);
+          setFoundlistsBackup(response.data); //원본데이터
+          DataDivision(response.data,16);
+        //setFoundlists(response.data);
+        
+        //DataDivision(response.data,16);
+        //setFoundlists(resultnum[0]);
       } catch (e) {
         if (e.message === 'Request failed with status code 401') {
           alert('401에러입니다.');
@@ -180,7 +191,7 @@ const FoundList = (props) => {
           <button onClick={(e) => onSearch(inputText)}>검색</button>
         </div>
       </div>
-      <Pagging />
+      
       <LISTWRAP css={FoundListstyle}>
         {foundlists.map((foundlist) => (
           <LISTITEM float="left" key={foundlist._id}>
@@ -221,24 +232,11 @@ const FoundList = (props) => {
         ))}
       </LISTWRAP>
 
-      {/* <div>
-        <button onClick={(e) => onPagging((foundlists.length / 3) * 1)}>1</button>
-        <br />
-        <button onClick={(e) => onPagging((foundlists.length / 3) * 2)}>2</button>
-        <br />
-        <button onClick={(e) => onPagging((foundlists.length / 3) * 3)}>3</button>
-        <br />
-      </div> */}
-      {/* <div>
-        <button onClick={(e) => onPagging(1)}>1</button>
-        <br />
-        <button onClick={(e) => onPagging(2)}>2</button>
-        <br />
-        <button onClick={(e) => onPagging(3)}>3</button>
-        <br />
-      </div> */}
+      {/* <Pagging number={resultnum}  /> */}
     </Fragment>
   );
 };
 
 export default FoundList;
+
+
