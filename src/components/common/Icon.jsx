@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { IoMdPin, IoIosTime } from 'react-icons/io';
+import { IoMdPin, IoIosTime, IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io';
 import { MdPhone, MdHome } from 'react-icons/md';
 
-const Icon = props => {
+const Icon = (props) => {
   const iconstyle = css`
     color: ${props.color || '#333'};
   `;
@@ -19,6 +19,12 @@ const Icon = props => {
   }
   if (props.type === 'MdHome') {
     return <MdHome css={iconstyle} {...props} />;
+  }
+  if (props.type === 'IoIosSkipBackward') {
+    return <IoIosSkipBackward css={iconstyle} {...props} />;
+  }
+  if (props.type === 'IoIosSkipForward') {
+    return <IoIosSkipForward css={iconstyle} {...props} />;
   }
 };
 

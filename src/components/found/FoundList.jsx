@@ -7,7 +7,6 @@ import { CheckLogin } from '../CheckLogin';
 import axios from 'axios';
 
 import Loding from '../common/Loding';
-//import FoundRemove from '../found/FoundRemove';
 
 import Icon from '../common/Icon';
 import { TABLE, LISTWRAP, LISTITEM } from '../common/Tag';
@@ -39,7 +38,7 @@ const FoundListstyle = css`
 `;
 
 const Searchstyle = css`
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
   width: 1080px;
   border: 1px #e8e8e8 solid;
   box-sizing: border-box;
@@ -79,12 +78,99 @@ const Searchstyle = css`
     /* m */
   }
 `;
+
+const Paggingstyle = css`
+  padding: 30px 0;
+  text-align: center;
+  button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+    color: #555;
+  }
+  @media (min-width: 768px) {
+    /* pc */
+  }
+  @media (max-width: 767px) {
+    /* m */
+  }
+`;
+
 const FoundList = (props) => {
-  const resultnum = [];
-  const [foundlists, setFoundlists] = useState(resultnum); //지점 리스트로 쓸 데이터
-  const [foundlistsBackup, setFoundlistsBackup] = useState(null); //지점 총 데이터 보관용
-  const [loading, setLoading] = useState(false);
-  const [inputText, setInputText] = useState('');
+  const [datalist, setDatalist] = useState(null); //원본 데이터
+  const [viewlist, setViewlist] = useState(null); //뿌려질용 데이터
+
+  const [loading, setLoading] = useState(false); //로딩용
+  const [error, setError] = useState(null); //에러용
+
+  const [inputText, setInputText] = useState(''); //검색창에 입력시 담기는 변수
+
+  const Pagging = (props) => {
+    const resultnum = []; //쪼개진 데이터
+    const num = props.slice;
+    if (props.number.length > num) {
+      let cntnum = Math.floor(props.number.length / num);
+      let div = num;
+      for (let i = 0; i <= cntnum; i++) {
+        resultnum.push(props.number.slice(div - num, div));
+        div += num;
+      }
+    }
+
+    const Hello = (key) => {
+      console.log(key);
+      setViewlist(resultnum[key]);
+    };
+
+    return (
+      <div css={Paggingstyle}>
+        <button onClick={() => Hello(0)}>
+          <Icon type="IoIosSkipBackward" />
+        </button>
+        {resultnum.map((results, index) => (
+          <button href="" key={index} onClick={() => Hello(index)}>
+            {index + 1}
+          </button>
+        ))}
+        <button onClick={() => Hello(resultnum.length - 1)}>
+          <Icon type="IoIosSkipForward" />
+        </button>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        // 요청이 시작 할 때에는 error 와 datalist 를 초기화하고
+        setError(null);
+        setDatalist(null);
+        setViewlist(null);
+        // loading 상태를 true 로 바꿉니다.
+        setLoading(true);
+        const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/stores');
+        /* 에러용 URL */
+        //const response = await axios.get('https://jsonplaceholder.typicode.com/users/showmeerror');
+        /* 에러용 URL */
+        setDatalist(response.data); //원본으로 쓸용
+        setViewlist(response.data); //뿌려질용
+        setTimeout(function () {
+          // console.log(resultnum[0]);
+        }, 5000);
+        //setViewlist();
+      } catch (e) {
+        setError(e);
+      }
+      setLoading(false);
+    };
+    fetchUsers();
+  }, []);
+
+  if (loading) return <Loding />;
+  if (error) return <div>에러가 발생했습니다</div>;
+  if (!datalist) return null;
 
   const onChange = (e) => {
     setInputText(e.target.value);
@@ -92,8 +178,8 @@ const FoundList = (props) => {
 
   const onSearch = (id) => {
     //검색창
-    const nextNames = foundlistsBackup.filter((item) => item.name.indexOf(id) !== -1);
-    setFoundlists(nextNames);
+    const nextNames = datalist.filter((item) => item.name.indexOf(id) !== -1);
+    setViewlist(nextNames);
   };
 
   const onRemove = (id) => {
@@ -107,8 +193,8 @@ const FoundList = (props) => {
           },
         })
         .then(function (response) {
-          const nextNames = foundlists.filter((name) => name._id !== id);
-          setFoundlists(nextNames);
+          const nextNames = viewlist.filter((name) => name._id !== id);
+          setViewlist(nextNames);
           alert('삭제되었습니다.');
         })
         .catch(function (error) {
@@ -116,72 +202,6 @@ const FoundList = (props) => {
         });
     }
   };
-
-  
-
-  const DataDivision = (aa,bb) => {
-    if(aa.length > bb){
-      let cntnum = Math.floor(aa.length / bb);
-      let div = bb;
-      for (let i = 0; i <= cntnum; i++) {
-        resultnum.push(aa.slice(div - bb, div));
-        div += bb;
-      }
-    };
-    console.log(foundlists);  
-  }
-
-  const Pagging = (props) =>{
-
-    const onPagging = (key) => {
-      setFoundlists(key)
-    };
-    return (
-      <div>
-        {resultnum.map((results,index) => (
-          <button href="" key={index} onClick={() => onPagging(results)}>
-          {index+1}
-          </button>
-        ))}
-      </div>
-    );
-  }
-
-
-
-
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/stores');
-          setFoundlistsBackup(response.data); //원본데이터
-          DataDivision(response.data,16);
-        //setFoundlists(response.data);
-        
-        //DataDivision(response.data,16);
-        //setFoundlists(resultnum[0]);
-      } catch (e) {
-        if (e.message === 'Request failed with status code 401') {
-          alert('401에러입니다.');
-        }
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
-  //로딩(컴포넌트로 뺄예정)
-  if (loading) {
-    return <Loding />;
-  }
-
-  //아직 foundlists 값이 설정되지 않았을 때
-  if (!foundlists) {
-    return null;
-  }
 
   return (
     <Fragment>
@@ -191,12 +211,12 @@ const FoundList = (props) => {
           <button onClick={(e) => onSearch(inputText)}>검색</button>
         </div>
       </div>
-      
+
       <LISTWRAP css={FoundListstyle}>
-        {foundlists.map((foundlist) => (
-          <LISTITEM float="left" key={foundlist._id}>
+        {viewlist.map((viewlists) => (
+          <LISTITEM float="left" key={viewlists._id}>
             <TABLE align="left" row_height="30px" titlesize="24px" titlecolor="#333" subsize="16px">
-              <caption>{foundlist.name}</caption>
+              <caption>{viewlists.name}</caption>
               <colgroup>
                 <col width="20%" />
                 <col width="70%" />
@@ -207,36 +227,34 @@ const FoundList = (props) => {
                     <Icon type="IoMdPin" color="#d13030" />
                     주소
                   </th>
-                  <td>{foundlist.address}</td>
+                  <td>{viewlists.address}</td>
                 </tr>
                 <tr>
                   <th>
                     <Icon type="MdPhone" color="#d13030" />
                     전화
                   </th>
-                  <td>{foundlist.phone}</td>
+                  <td>{viewlists.phone}</td>
                 </tr>
                 <tr>
                   <th>
                     <Icon type="IoIosTime" color="#d13030" />
                     영업시간
                   </th>
-                  <td>{foundlist.hour}</td>
+                  <td>{viewlists.hour}</td>
                 </tr>
               </tbody>
             </TABLE>
             <CheckLogin login>
-              <button onClick={(e) => onRemove(foundlist._id)}>지점삭제</button>
+              <button onClick={(e) => onRemove(viewlists._id)}>지점삭제</button>
             </CheckLogin>
           </LISTITEM>
         ))}
       </LISTWRAP>
 
-      {/* <Pagging number={resultnum}  /> */}
+      <Pagging number={datalist} slice={6} />
     </Fragment>
   );
 };
 
 export default FoundList;
-
-
