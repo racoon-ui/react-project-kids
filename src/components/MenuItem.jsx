@@ -8,6 +8,7 @@ const MenuItem = (menu) => {
   const [show, setShow] = useState(false);
   const [MenuInfo] = useState(menu.data);
   const { onRemove } = menu;
+
   return (
     <li>
       <Link to={`menu/${MenuInfo._id}`}>

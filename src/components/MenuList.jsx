@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useState, useEffect } from 'react';
-import MenuItem from './MenuItem';
+import Menus from './Menus';
 import ProductsListStyle from '../styles/ProductsListStyle';
 import axios from 'axios';
 import store from 'store';
@@ -11,13 +11,12 @@ import Pagination from './products/Pagination';
 /*
 ** 전체적인 스타일 작업은 대략적인 기능 완료 후에 작업할 예정
 - 기능진행해야할것들
-1. 가격 천원단위 콤마삽입 => (해결!!!!)
-2. 상품리스트 12개 이상이면 페이징 처리
-(콘솔까지 찍었으나 화면은 그대로임...)
-3. 상품상세... ?
+1. 상품리스트 12개 이상이면 페이징 처리
+(페이징 ok, 삭제 수정해야함)
+2. 상품상세... ?
 (상세를 모달창으로 할 것인지,
   아님 모달창 따로, 링크이동 따로 할 것인지 ?)
-4. 에러처리 공통
+3. 에러처리 공통
 *
 */
 
@@ -26,7 +25,7 @@ const MenuList = () => {
   const [loading, setLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(2);
+  const [postsPerPage] = useState(10);
 
   const config = {
     headers: {
@@ -39,7 +38,7 @@ const MenuList = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/products');
+        const response = await axios.get(`https://shrouded-escarpment-56668.herokuapp.com/api/products/`);
         setMenus(response.data);
       } catch (e) {
         alert(e);
@@ -73,17 +72,18 @@ const MenuList = () => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = menus.slice(indexOfFirstPost, indexOfLastPost);
-  console.log(currentPosts);
   // 페이지 전환
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  console.log(currentPosts);
 
   return (
     <ProductsListStyle>
-      <ul className="menuListInfo">
+      {/* <ul className="menuListInfo" menus={currentPosts}>
         {menus.map((menu) => (
-          <MenuItem key={menu._id} data={menu} onRemove={onRemove} menus={currentPosts} />
+          <MenuItem key={menu._id} data={menu} onRemove={onRemove} />
         ))}
-      </ul>
+      </ul> */}
+      <Menus menus={currentPosts} />
       <Pagination postsPerPage={postsPerPage} totalPosts={menus.length} paginate={paginate} />
     </ProductsListStyle>
   );
