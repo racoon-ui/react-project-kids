@@ -3,11 +3,11 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 import Subtitle from '../components/Subtitle';
 
-/* layout */
-import Info_01 from '../components/Info_01';
-import Info_02 from '../components/Info_02';
-import Info_03 from '../components/Info_03';
-import Info_04 from '../components/Info_04';
+/* page,components */
+import Info_01 from './Info/Info_01';
+import Info_02 from './Info/Info_02';
+import Info_03 from './Info/Info_03';
+import Info_04 from './Info/Info_04';
 
 const Info = () => {
   return (
