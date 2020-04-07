@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React from 'react';
 import { css, jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
 import store from 'store';
+import { CheckLogin } from './CheckLogin';
 
 const memberstyle = css`
   @media (min-width: 1024px) {
@@ -56,38 +56,14 @@ const onLogout = () => {
   window.location = '/';
 };
 
-let isLogin = store.get('token');
 let name = store.get('name');
 
-const LoginDiv = () => {
-  return (
-    <React.Fragment>
-      <span className="txt_hi">안녕하세요 {name} 님</span>
-      <Link to="/login" onClick={onLogout} className="btn_logout">
-        로그아웃
-      </Link>
-    </React.Fragment>
-  );
-};
-
-const LogoutDiv = () => {
-  return (
-    <React.Fragment>
-      <Link to="/login">로그인</Link>
-      <Link to="/memberJoin">회원가입</Link>
-    </React.Fragment>
-  );
-};
-
-const MemberBox = props => {
+const MemberBox = (props) => {
   return (
     <div
       className="member_box"
       css={css`
         ${memberstyle}
-        @media (min-width: 1024px) {
-          /* pc */
-        }
         @media (max-width: 1024px) {
           /* m */
           display: ${props.lnbstate === 'off' ? 'none' : 'block'};
@@ -95,7 +71,17 @@ const MemberBox = props => {
       `}
       {...props}
     >
-      {isLogin ? <LoginDiv /> : <LogoutDiv />}
+      <CheckLogin login>
+        <span className="txt_hi">안녕하세요 {name} 님</span>
+        <a href="/" onClick={onLogout} className="btn_logout">
+          로그아웃
+        </a>
+      </CheckLogin>
+
+      <CheckLogin logout>
+        <Link to="/login">로그인</Link>
+        <Link to="/memberJoin">회원가입</Link>
+      </CheckLogin>
     </div>
   );
 };
