@@ -37,7 +37,7 @@ const Login = () => {
       .then(function (response) {
         store.set('token', response.data.token);
         store.set(
-          'name',
+          'email',
           response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
         );
         alert('로그인이 완료되었습니다 :)');

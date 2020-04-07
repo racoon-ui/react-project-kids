@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { Link, Redirect } from 'react-router-dom';
-import store from 'store';
+import { Link } from 'react-router-dom';
+import { onLogout, getEmail } from '../utils/auth';
 import { CheckLogin } from './CheckLogin';
 
 const memberstyle = css`
@@ -50,14 +50,6 @@ const memberstyle = css`
   }
 `;
 
-const onLogout = () => {
-  store.remove('token');
-  store.remove('name');
-  return <Redirect to="/" />;
-};
-
-let name = store.get('name');
-
 const MemberBox = (props) => {
   return (
     <div
@@ -72,7 +64,7 @@ const MemberBox = (props) => {
       {...props}
     >
       <CheckLogin login>
-        <span className="txt_hi">안녕하세요 {name} 님</span>
+        <span className="txt_hi">안녕하세요 {getEmail()} 님</span>
         <a href="/" onClick={onLogout} className="btn_logout">
           로그아웃
         </a>
