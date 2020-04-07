@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import AuthRoute from './components/AuthRoute';
 
 /* style */
 import './styles/common.scss';
@@ -37,7 +38,7 @@ const App = () => {
           <Route exact path="/found" component={Found} />
           <Route path="/found/add" component={FoundAdd} />
           <Route path="/branch" component={Branch} />
-          <Route path="/cs" component={Cs} />
+          <AuthRoute path="/cs" component={Cs} />
           <Route path="/memberJoin" component={MemberJoin} />
           <Route path="/login" component={Login} />
           <Route component={NotFound} />
