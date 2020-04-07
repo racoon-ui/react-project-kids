@@ -1,8 +1,8 @@
 import React from 'react';
-import store from 'store';
+import { getToken } from '../utils/auth';
 
-export const CheckLogin = props => {
-  const token = store.get('token');
+export const CheckLogin = (props) => {
+  const token = getToken();
   let loginDiv, logoutDiv;
 
   if (props.login) {
