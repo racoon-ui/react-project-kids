@@ -8,7 +8,7 @@ import axios from 'axios';
 import store from 'store';
 import { Redirect } from 'react-router-dom';
 
-const Login = ({ authenticated, location }) => {
+const Login = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -60,8 +60,7 @@ const Login = ({ authenticated, location }) => {
 
   const errrorLength = Object.keys(errors).length;
 
-  const { from } = location.state || { from: { pathname: '/' } };
-  if (authenticated) return <Redirect to={from} />;
+  if (store.get('token')) return <Redirect to="/" />;
 
   return (
     <FormStyle>
