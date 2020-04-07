@@ -11,7 +11,7 @@ const MenuItem = (menu) => {
 
   return (
     <li>
-      <Link to={`menu/${MenuInfo._id}`}>
+      <Link to={`/menu/${MenuInfo._id}`}>
         <div className="menuImg">
           <img src={MenuInfo.image} alt={MenuInfo.name} />
         </div>
@@ -29,6 +29,9 @@ const MenuItem = (menu) => {
       <button className="openBtnModal" onClick={() => setShow(true)}>
         상품상세
       </button>
+      <Link to="/menu/productModify">
+        <button className="modifyBtn">상품수정</button>
+      </Link>
 
       <button className="delBtn" onClick={() => onRemove(MenuInfo._id)}>
         상품삭제

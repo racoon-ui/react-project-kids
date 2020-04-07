@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 const ProductsFormStyle = styled('div')`
   padding: 50px 0;
   margin: 0 auto;
-  width: 450px;
+  width: 480px;
   h3 {
     text-align: center;
     font-size: 30px;
@@ -51,11 +51,14 @@ const ProductsFormStyle = styled('div')`
     /* positions for the 2 images. Change both "50%" to "0%" or "100%" and tri again */
     background-position: 50% 100%, 50% 100%;
 
+    -webkit-transition: all 0.3s ease-in-out;
     /* animation solely on background-size */
     transition: background-size 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    border-radius: 5px 5px 0 0;
     &:focus {
       background-size: 100% 2px, 100% 1px;
       outline: none;
+      background-color: #ffe6e6;
     }
   }
   .error-container {

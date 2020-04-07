@@ -23,6 +23,9 @@ const Button = styled.button`
   font-size: 15px;
   border-radius: 5px;
   cursor: pointer;
+  background: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
 `;
 
 const Menu_01 = () => {

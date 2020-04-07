@@ -54,13 +54,19 @@ const ProductsListStyle = styled('div')`
       border: none;
       height: 40px;
       font-size: 14px;
+      cursor: pointer;
+    }
+    .openBtnModal {
+      border-top: 1px solid #ccc;
+      width: 100%;
+    }
+    .modifyBtn {
+      background: #969696;
+      color: #fff;
     }
     .delBtn {
       background: #d74949;
       color: #fff;
-    }
-    .openBtnModal {
-      border-top: 1px solid #ccc;
     }
   }
 
@@ -132,6 +138,32 @@ const ProductsListStyle = styled('div')`
       .menuPrice {
         font-weight: 600;
         color: #d74949;
+      }
+    }
+  }
+
+  // pagingStyle
+  .pagination {
+    overflow: hidden;
+    margin: 50px auto 0;
+    width: 100px;
+    li {
+      float: left;
+      margin-left: 10px;
+      &:first-of-type {
+        margin-left: 0;
+      }
+      button {
+        background: #fff;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        border: 1px solid #ccc;
+        &:hover {
+          font-weight: 600;
+        }
       }
     }
   }
