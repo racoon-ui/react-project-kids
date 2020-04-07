@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import store from 'store';
 import { CheckLogin } from './CheckLogin';
 
@@ -53,7 +53,7 @@ const memberstyle = css`
 const onLogout = () => {
   store.remove('token');
   store.remove('name');
-  window.location = '/';
+  return <Redirect to="/" />;
 };
 
 let name = store.get('name');

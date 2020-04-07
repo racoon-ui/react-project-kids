@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { LoginValidator } from '../components/validators/LoginValidator';
 import axios from 'axios';
 import store from 'store';
+import { Redirect } from 'react-router-dom';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -20,7 +21,7 @@ const Login = () => {
     validationSchema: LoginValidator,
   });
 
-  const onChange = e => {
+  const onChange = (e) => {
     const changeForm = {
       ...form,
       [e.target.name]: e.target.value,
@@ -33,7 +34,7 @@ const Login = () => {
       .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', {
         ...form,
       })
-      .then(function(response) {
+      .then(function (response) {
         store.set('token', response.data.token);
         store.set(
           'name',
@@ -42,22 +43,24 @@ const Login = () => {
         alert('로그인이 완료되었습니다 :)');
         window.location = '/';
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log('로그인 정보가 잘못되었습니다');
       });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     LoginValidator.validate(form)
-      .then(form => {
+      .then((form) => {
         onRegister();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
   const errrorLength = Object.keys(errors).length;
+
+  if (store.get('token')) return <Redirect to="/" />;
 
   return (
     <FormStyle>
