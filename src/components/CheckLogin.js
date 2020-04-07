@@ -2,6 +2,7 @@ import React from 'react';
 import { isLogin } from '../utils/auth';
 
 export const CheckLogin = (props) => {
+
   let loginDiv, logoutDiv;
 
   if (props.login) {
@@ -15,4 +16,5 @@ export const CheckLogin = (props) => {
   } else if (!isLogin()) {
     return <>{logoutDiv}</>;
   }
+
 };
