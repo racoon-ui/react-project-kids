@@ -34,7 +34,7 @@ const App = () => {
           <Route exact path={['/', '/main']} component={Main} />
           <Route path="/info" component={Info} />
           <Route path="/menu" component={Menu} />
-          <Route exact path="/found" component={Found} />
+          <Route path="/found" component={Found} />
           <Route path="/branch" component={Branch} />
           <AuthRoute path="/cs" component={Cs} />
           <Route path="/memberJoin" component={MemberJoin} />

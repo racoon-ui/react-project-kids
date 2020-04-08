@@ -41,9 +41,10 @@ const CONTAINER = (props) => (
 
 const INNER = (props) => (
   <div
-    className="container"
+    className="inner"
     css={css`
-      padding: ${props.padding || '10px'};
+      margin: 0 auto;
+      width: ${props.width || '1080px'};
     `}
     {...props}
   >
