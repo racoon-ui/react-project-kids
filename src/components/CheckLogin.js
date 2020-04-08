@@ -1,8 +1,8 @@
 import React from 'react';
-import store from 'store';
+import { isLogin } from '../utils/auth';
 
-export const CheckLogin = props => {
-  const token = store.get('token');
+export const CheckLogin = (props) => {
+
   let loginDiv, logoutDiv;
 
   if (props.login) {
@@ -11,9 +11,10 @@ export const CheckLogin = props => {
     logoutDiv = props.children;
   }
 
-  if (token) {
+  if (isLogin()) {
     return <>{loginDiv}</>;
-  } else if (!token) {
+  } else if (!isLogin()) {
     return <>{logoutDiv}</>;
   }
+
 };
