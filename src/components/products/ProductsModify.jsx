@@ -45,7 +45,7 @@ function ProductsModify() {
     axios
       .patch(`https://shrouded-escarpment-56668.herokuapp.com/api/products/${_id}`, form, config)
       .then(function (response) {
-        alert('성공적으로 상품이 생성되었습니다');
+        alert('성공적으로 상품이 수정되었습니다.');
         window.location = '/menu';
       })
       .catch(function (error) {
@@ -56,7 +56,7 @@ function ProductsModify() {
 
   return (
     <ProductsFormStyle>
-      <h3>상품등록</h3>
+      <h3>상품수정</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="category" className="control-label">

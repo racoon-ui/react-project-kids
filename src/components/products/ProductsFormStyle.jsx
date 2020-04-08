@@ -84,6 +84,7 @@ const ProductsFormStyle = styled('div')`
     ${'' /* background: ${(props) => (props.goBack ? '#000' : '#d1302f')}; */}
     ${'' /* color: ${(props) => (props.goBack ? '#fff' : '#fff')}; */}
     border: none;
+    cursor: pointer;
   }
 `;
 export default ProductsFormStyle;

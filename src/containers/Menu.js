@@ -16,7 +16,11 @@ const Menu = () => {
     <div>
       <Subtitle title="메뉴" />
       <Switch>
-        <Route path={['/menu/menu01', '/menu']} exact component={Menu_01} />
+        <Route
+          path={['/menu/menu01', '/menu']}
+          exact
+          component={Menu_01}
+        />
         <Route path="/menu/menu02" component={Menu_02} />
         <Route path="/menu/menu03" component={Menu_03} />
         <Route path="/menu/menu04" component={Menu_04} />
