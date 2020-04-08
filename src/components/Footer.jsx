@@ -1,16 +1,19 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
+
+import styled from '@emotion/styled';
 
 import Nav from '../components/Nav';
 import Logo from '../components/Logo';
 
 
-const footerstyle = css`
-  padding-bottom: 50px;
-  background: #2f2f2f;
+
+const FooterBox = styled.footer`
+  padding-bottom:${props => props.padBottom || '0' };
+  background-color:${props => props.backColor || '#000' };
   text-align: center;
-  .sub-logo{
-    padding:30px 0;
+  .sub-logo {
+    padding: 30px 0;
   }
   address {
     p {
@@ -27,11 +30,11 @@ const footerstyle = css`
   @media (max-width: 1024px) {
     /* m */
   }
-`;
+`
 
 const Footer = props => {
   return (
-    <footer css={footerstyle} {...props}>
+    <FooterBox backColor="#2f2f2f" padBottom="50px">
       <Nav type="sitemaplist" />
       <Logo type="footer" />
       <address>
@@ -42,7 +45,7 @@ const Footer = props => {
         <p>TEL : 02-714-8026 &nbsp; FAX : 02-706-8025 &nbsp; 이메일 : info@bizvalley.co.kr</p>
         <p className="fs12">Copyrights ⓒ 2017 All Rights Reserved. Designed By bizvalley.</p>
       </address>
-    </footer>
+    </FooterBox>
   );
 };
 

@@ -1,0 +1,66 @@
+GET https://shrouded-escarpment-56668.herokuapp.com/api/stores
+###
+// 회원가입
+POST https://shrouded-escarpment-56668.herokuapp.com/api/users/register
+Content-Type: application/json
+
+{
+	"email": "dongdong@example.com",
+	"name": "김동현",
+	"password": "12345678",
+	"phone": "010-1234-5678"
+}
+
+###
+// 로그인
+POST https://shrouded-escarpment-56668.herokuapp.com/api/users/login
+Content-Type: application/json
+
+{
+	"email": "dongdong@example.com",
+	"password": "12345678"
+}
+
+###
+// 상점목록
+GET https://shrouded-escarpment-56668.herokuapp.com/api/stores
+Content-Type: application/json
+###
+// 상점생성
+POST https://shrouded-escarpment-56668.herokuapp.com/api/stores
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2I3ZmU5NWMwYTAwMTdkOGRkN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTU4NDk1NDQ4OH0.QZAtwwsUHHwakkQ3lZY8qxeuy3i5QBERlwYsmue58hg
+
+{
+	"name": "오세천",
+	"address": "서울지역",
+	"phone": "02-7777-6666",
+	"hour": "08:00~21:00",
+	"facilities": ["주차가능", "소주판매", "단체", "와이파이","신용카드가능"],
+	"location": {
+		"type": "Point",
+		"coordinates": [37.538669,126.96654]
+	}
+}
+
+### 
+//수정
+PATCH https://shrouded-escarpment-56668.herokuapp.com/api/stores/5e787c9be95c0a0017d8dd7d
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2I3ZmU5NWMwYTAwMTdkOGRkN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTU4NDk1NDQ4OH0.QZAtwwsUHHwakkQ3lZY8qxeuy3i5QBERlwYsmue58hg
+
+{
+  "name": "hihihi",
+  "phone": "010-5550-8888",
+"address": "서울시 용산구 원효로 222"
+}
+
+###
+//삭제
+DELETE https://shrouded-escarpment-56668.herokuapp.com/api/stores/5e787c9be95c0a0017d8dd7d
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTc4N2I3ZmU5NWMwYTAwMTdkOGRkN2IiLCJyb2xlIjoidXNlciIsImlhdCI6MTU4NDk1NDQ4OH0.QZAtwwsUHHwakkQ3lZY8qxeuy3i5QBERlwYsmue58hg
+###
+//하나선택
+GET https://shrouded-escarpment-56668.herokuapp.com/api/stores/5e89853d59223300177aea70
+Content-Type: application/json
