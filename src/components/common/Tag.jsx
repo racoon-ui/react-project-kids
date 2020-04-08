@@ -39,6 +39,18 @@ const CONTAINER = (props) => (
   </div>
 );
 
+const INNER = (props) => (
+  <div
+    className="container"
+    css={css`
+      padding: ${props.padding || '10px'};
+    `}
+    {...props}
+  >
+    {props.children}
+  </div>
+);
+
 const LISTWRAP = (props) => (
   <div
     className="listwrap"
@@ -67,4 +79,4 @@ const LISTITEM = (props) => (
   </div>
 );
 
-export { TABLE, CONTAINER, LISTWRAP, LISTITEM };
+export { TABLE, CONTAINER, LISTWRAP, LISTITEM, INNER };

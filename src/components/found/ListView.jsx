@@ -10,6 +10,8 @@ import { CheckLogin } from '../CheckLogin';
 
 
 const FoundListstyle = css`
+  margin:0 auto;
+  width:1080px;
   border-top: 1px #dfdfdf solid;
   .listitem {
     padding: 15px;
@@ -45,10 +47,7 @@ const FoundListstyle = css`
 
 
 
-const ListView = ({ posts, loading,postsremove }) => {
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+const ListView = ({ posts,postsremove }) => {
 
   return (
 
@@ -86,8 +85,8 @@ const ListView = ({ posts, loading,postsremove }) => {
               </tbody>
             </TABLE>
             <CheckLogin login>
-              {/* <button onClick={(e) => onRemove(post._id)}>지점삭제</button> */}
-              <button  onClick={() => postsremove(post._id)}>지점삭제</button>
+              <button onClick={() => postsremove(post._id)}>지점삭제</button>
+              <button onClick={() => console.log('상세보기버튼')}>상세보기</button>              
             </CheckLogin>
           </LISTITEM>
         ))}

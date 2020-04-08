@@ -18,7 +18,6 @@ import Main from './containers/Main';
 import Info from './containers/Info';
 import Menu from './containers/Menu';
 import Found from './containers/Found';
-import FoundAdd from './containers/FoundAdd';
 import Branch from './containers/Branch';
 import Cs from './containers/Cs';
 import MemberJoin from './containers/MemberJoin';
@@ -35,7 +34,6 @@ const App = () => {
           <Route path="/info" component={Info} />
           <Route path="/menu" component={Menu} />
           <Route exact path="/found" component={Found} />
-          <Route path="/found/add" component={FoundAdd} />
           <Route path="/branch" component={Branch} />
           <Route path="/cs" component={Cs} />
           <Route path="/memberJoin" component={MemberJoin} />

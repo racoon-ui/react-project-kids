@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { IoMdPin, IoIosTime, IoIosSkipBackward, IoIosSkipForward } from 'react-icons/io';
+import { IoMdPin, IoIosTime, IoIosSkipBackward, IoIosSkipForward, IoMdArrowDropright,IoMdArrowDropleft } from 'react-icons/io';
 import { MdPhone, MdHome } from 'react-icons/md';
 
 const Icon = (props) => {
@@ -25,6 +25,12 @@ const Icon = (props) => {
   }
   if (props.type === 'IoIosSkipForward') {
     return <IoIosSkipForward css={iconstyle} {...props} />;
+  }
+  if (props.type === 'IoMdArrowDropright') {
+    return <IoMdArrowDropright css={iconstyle} {...props} />;
+  }
+  if (props.type === 'IoMdArrowDropleft') {
+    return <IoMdArrowDropleft css={iconstyle} {...props} />;
   }
 };
 

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-
+import { useState } from 'react';
 
 
 
@@ -53,19 +53,16 @@ const Searchstyle = css`
   }
 `;
 
-// GET https://shrouded-escarpment-56668.herokuapp.com/api/stores?name=수원점
-// Content-Type: application/json
 
 
-const SearchBar = () => {
+
+const SearchBar = ({searchBtn,children}) => {
+    const [search, setSearch] = useState('');
     return (
         <div css={Searchstyle}>
             <div>
-            <input type="text" placeholder="지점명을 입력하세요"  />
-                <button>검색</button>
-
-                {/* <input type="text" placeholder="지점명을 입력하세요" value={inputText} onChange={onChange} />
-                <button onClick={(e) => onSearch(inputText)}>검색</button> */}
+            <input type="text" placeholder="지점명을 입력하세요" onChange={(e) => setSearch(e.target.value)} />
+                <button onClick={(e) => searchBtn(search)}>{children}</button>
             </div>
         </div>
     );

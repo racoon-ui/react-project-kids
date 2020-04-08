@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { jsx } from '@emotion/core';
 import { useForm } from 'react-hook-form';
-import FormStyle from '../styles/FormStyle';
+import FormStyle from '../../styles/FormStyle';
 import axios from 'axios';
 import store from 'store';
 //import { array } from 'yup';
