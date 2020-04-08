@@ -1,7 +1,20 @@
 import React from 'react';
+import { isLogin } from '../utils/auth';
 
 export const CheckLogin = (props) => {
-  const token = localStorage.getItem('token');
-  console.log(token);
-  return <>{token ? props.children : props.children}</>;
+
+  let loginDiv, logoutDiv;
+
+  if (props.login) {
+    loginDiv = props.children;
+  } else if (props.logout) {
+    logoutDiv = props.children;
+  }
+
+  if (isLogin()) {
+    return <>{loginDiv}</>;
+  } else if (!isLogin()) {
+    return <>{logoutDiv}</>;
+  }
+
 };
