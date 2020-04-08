@@ -7,13 +7,14 @@ import axios from 'axios';
 import Menus from './Menus';
 import ProductsListStyle from '../styles/ProductsListStyle';
 import Pagination from './products/Pagination';
+import Loading from './products/Loading';
 
 // import usePromise from './products/usePromise';
 
+// 상품 리스트 부모
 const MenuList = () => {
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
@@ -33,7 +34,7 @@ const MenuList = () => {
 
   // 대기 중일 때
   if (loading) {
-    return <div> ~~~ 로 딩 중 ~~~</div>;
+    return <Loading />;
   }
 
   //아직 값이 설정되지 않았을 때

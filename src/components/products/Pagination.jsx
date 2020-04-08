@@ -1,5 +1,6 @@
 import React from 'react';
 
+// 페이징 컴포넌트
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 

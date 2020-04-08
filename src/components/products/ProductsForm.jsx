@@ -8,6 +8,7 @@ import ProductsFormStyle from './ProductsFormStyle';
 import axios from 'axios';
 import store from 'store';
 
+// 상품생성 폼
 function ProductsForm() {
   const [form, setForm] = useState({
     category: '',
@@ -49,7 +50,7 @@ function ProductsForm() {
         window.location = '/menu';
       })
       .catch(function (error) {
-        alert('실패했습니다.');
+        alert('상품 생성에 실패했습니다.');
       });
   };
   const Error = ({ message }) => <div className="error-container">{message}</div>;

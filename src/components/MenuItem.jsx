@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ProdcutsModal from './products/ProductsModal';
-
+// 상품 리스트 자식
 const MenuItem = ({ data, onRemove }) => {
   const [show, setShow] = useState(false);
 
   return (
     <li>
-      <Link to={`/menu/${data._id}`}>
+      <Link to={`menu/${data._id}`}>
         <div className="menuImg">
           <img src={data.image} alt={data.name} />
         </div>
@@ -19,7 +19,7 @@ const MenuItem = ({ data, onRemove }) => {
           <p>메뉴이름 : {data.name}</p>
           <p>메뉴상세 : {data.summary}</p>
           <p className="menuPrice">
-            메뉴가격 :{' '}
+            메뉴가격 :
             {data.price.toLocaleString(navigator.language, {
               minimumFractionDigits: 0,
             })}
@@ -50,7 +50,7 @@ const MenuItem = ({ data, onRemove }) => {
           <p>메뉴이름 : {data.name}</p>
           <p>메뉴상세 : {data.summary}</p>
           <p className="menuPrice">
-            메뉴가격 :{' '}
+            메뉴가격 :
             {data.price.toLocaleString(navigator.language, {
               minimumFractionDigits: 0,
             })}

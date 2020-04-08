@@ -4,10 +4,13 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductsFormValidator } from './ProductsFormValidator';
 import { Link } from 'react-router-dom';
+
 import ProductsFormStyle from './ProductsFormStyle';
+
 import axios from 'axios';
 import store from 'store';
 
+// 상품수정 폼(화면만 만들어 둔 상태, 기능 미구현)
 function ProductsModify() {
   const [form, setForm] = useState({
     category: '',

@@ -5,8 +5,9 @@ import MenuItem from './MenuItem';
 import axios from 'axios';
 import store from 'store';
 
-const menus = ({ menus }) => {
-  // header token
+// 상품 리스트 중간부모 컴포넌트..? (샌드위치)
+const menus = ({ menus, match }) => {
+  // 로그인 정보
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -14,7 +15,7 @@ const menus = ({ menus }) => {
     },
   };
 
-  // menuList remove
+  // 상품삭제
   const onRemove = (_id) => {
     axios
       .delete(`https://shrouded-escarpment-56668.herokuapp.com/api/products/${_id}`, config)
