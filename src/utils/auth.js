@@ -7,7 +7,7 @@ export const getToken = () => {
 };
 
 export const getEmail = () => {
-  return store.get('email');
+  return store.get('id');
 };
 
 export const isLogin = () => {
@@ -19,6 +19,6 @@ export const isLogin = () => {
 
 export const onLogout = () => {
   store.remove('token');
-  store.remove('name');
+  store.remove('id');
   return <Redirect to="/" />;
 };
