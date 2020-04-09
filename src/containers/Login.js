@@ -32,7 +32,7 @@ const Login = () => {
     validationSchema: LoginValidator,
   });
 
-  const [{ loading, error, data }, fetchData] = useRestApi(null, { manual: true });
+  const [{ loading, error, data }, fetchData] = useRestApi(null);
 
   const onChange = (e) => {
     const changeForm = {
@@ -81,14 +81,14 @@ const Login = () => {
 
   const errrorLength = Object.keys(errors).length;
 
-  const [{ loading, error }] = useRestApi('/api/users/login', {
-    method: 'post',
-    manual: false,
-    data: { ...form },
-  });
-  console.log('loading', loading);
-  console.log('error', error);
-  console.log('form', form);
+  // const [{ loading, error }] = useRestApi('/api/users/login', {
+  //   method: 'post',
+  //   manual: false,
+  //   data: { ...form },
+  // });
+  // console.log('loading', loading);
+  // console.log('error', error);
+  // console.log('form', form);
 
   // const [{ loading, error, data }] = useRestApi('/api/stores', { manual: false });
   // if (store.get('token')) return <Redirect to="/" />;

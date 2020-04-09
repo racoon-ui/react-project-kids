@@ -63,7 +63,7 @@ axiosInstance.interceptors.request.use(
  */
 function createInitialState(options) {
   return {
-    loading: !options.manual,
+    loading: options && !options.manual,
   };
 }
 /**
@@ -113,7 +113,7 @@ export default function useRestApi(config, options) {
   }
   const [state, dispatch] = useReducer(reducer, createInitialState(options));
   useEffect(() => {
-    if (!options.manual) {
+    if (options && !options.manual) {
       request(config, dispatch);
     }
   }, [JSON.stringify(config)]);
