@@ -4,21 +4,9 @@ import { jsx } from '@emotion/core';
 import FormStyle from '../styles/FormStyle';
 import { useForm } from 'react-hook-form';
 import { LoginValidator } from '../components/validators/LoginValidator';
-import axios from 'axios';
 import store from 'store';
 import { Redirect } from 'react-router-dom';
 import useRestApi from '../utils/api';
-
-// const onRegister = () => {
-//   const [{ loading, error }, test] = useRestApi('/api/users/login', {
-//     method: 'post',
-//     manual: true,
-//     data: { ...form },
-//   });
-//   console.log('loading', loading);
-//   console.log('error', error);
-//   console.log('test', test);
-// };
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -43,31 +31,19 @@ const Login = () => {
   };
 
   const onRegister = () => {
-    console.log('onRegister');
-
     fetchData({
       url: '/api/users/login',
       method: 'POST',
       data: form,
     });
-    // fetchData('/api/users/login', ...ㅏorm);
-    // axios
-    //   .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', {
-    //     ...form,
-    //   })
-    //   .then(function (response) {
-    //     store.set('token', response.data.token);
-    //     store.set(
-    //       'email',
-    //       response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
-    //     );
-    //     alert('로그인이 완료되었습니다 :)');
-    //     window.location = '/';
-    //   })
-    //   .catch(function (error) {
-    //     console.log('로그인 정보가 잘못되었습니다');
-    //   });
   };
+  if (data) {
+    store.set('token', data.token);
+    // store.set('id', data.config.data.slice(10, data.config.data.indexOf('@'), data.config.data.length));
+    store.set('id', data._id);
+    alert('로그인이 완료되었습니다 :)');
+    window.location = '/';
+  }
 
   const onSubmit = (e) => {
     LoginValidator.validate(form)
@@ -81,19 +57,7 @@ const Login = () => {
 
   const errrorLength = Object.keys(errors).length;
 
-  // const [{ loading, error }] = useRestApi('/api/users/login', {
-  //   method: 'post',
-  //   manual: false,
-  //   data: { ...form },
-  // });
-  // console.log('loading', loading);
-  // console.log('error', error);
-  // console.log('form', form);
-
-  // const [{ loading, error, data }] = useRestApi('/api/stores', { manual: false });
-  // if (store.get('token')) return <Redirect to="/" />;
-
-  console.log(data);
+  if (store.get('token')) return <Redirect to="/" />;
 
   return (
     <FormStyle>
