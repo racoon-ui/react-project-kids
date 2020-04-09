@@ -57,6 +57,11 @@ const ProductsFormStyle = styled('div')`
       outline: none;
       background-color: #ffe6e6;
     }
+    &:-internal-autofill-selected {
+      background-color: red !important;
+      background-image: none !important;
+      color: -internal-light-dark-color(black, white) !important;
+    }
   }
   .error-container {
     line-height: 24px;

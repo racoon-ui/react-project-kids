@@ -6,7 +6,7 @@ import axios from 'axios';
 import store from 'store';
 
 // 상품 리스트 중간부모 컴포넌트..? (샌드위치)
-const menus = ({ menus, match }) => {
+const menus = ({ menus }) => {
   // 로그인 정보
   const config = {
     headers: {

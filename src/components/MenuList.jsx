@@ -1,46 +1,26 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { useState, useEffect } from 'react';
-
-import axios from 'axios';
+import { useState } from 'react';
 
 import Menus from './Menus';
 import ProductsListStyle from '../styles/ProductsListStyle';
 import Pagination from './products/Pagination';
 import Loading from './products/Loading';
-
-// import usePromise from './products/usePromise';
+import useRestApi from '../utils/api';
 
 // 상품 리스트 부모
 const MenuList = () => {
-  const [menus, setMenus] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get('https://shrouded-escarpment-56668.herokuapp.com/api/products');
-        setMenus(response.data);
-      } catch (e) {
-        alert(e);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+  const [{ loading, data: menus, error }] = useRestApi('/api/products', { manual: false });
 
   // 대기 중일 때
-  if (loading) {
-    return <Loading />;
-  }
-
+  if (loading) return <Loading />;
+  // 에러
+  if (error) return <div>에러가 발생했습니다</div>;
   //아직 값이 설정되지 않았을 때
-  if (!menus) {
-    return null;
-  }
+  if (!menus) return null;
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -50,7 +30,7 @@ const MenuList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <ProductsListStyle>
+    <ProductsListStyle lo>
       <Menus menus={currentPosts} />
       <Pagination postsPerPage={postsPerPage} totalPosts={menus.length} paginate={paginate} />
     </ProductsListStyle>
