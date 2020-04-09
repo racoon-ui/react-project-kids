@@ -75,6 +75,7 @@ const ProductsFormStyle = styled('div')`
     color: #d1302f;
   }
   button {
+    position: relative;
     float: left;
     width: 48%;
     height: 50px;

@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import ProdcutsModal from './products/ProductsModal';
 import { CheckLogin } from './CheckLogin';
@@ -36,9 +35,9 @@ const MenuItem = ({ data, onRemove }) => {
       </button>
 
       <CheckLogin login>
-        <Link to="/menu/productModify">
-          <button className="modifyBtn">상품수정</button>
-        </Link>
+        <button className="modifyBtn" onClick={() => alert('준비중입니다 :)')}>
+          상품수정
+        </button>
 
         <button className="delBtn" onClick={() => onRemove(data._id)}>
           상품삭제

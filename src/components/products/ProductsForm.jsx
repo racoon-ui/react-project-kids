@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductsFormValidator } from './ProductsFormValidator';
 import { Link } from 'react-router-dom';
+
 import ProductsFormStyle from './ProductsFormStyle';
+import BtnLoading from './BtnLoading';
 
 import useRestApi from '../../utils/api';
-import Loading from '../products/Loading';
 
 // 상품생성 폼
 const ProductsForm = () => {
@@ -38,10 +39,7 @@ const ProductsForm = () => {
   };
 
   const onRegister = () => {
-    // e.preventDefault();
-
     console.log('onRegister');
-
     fetchData({
       url: '/api/products',
       method: 'POST',
@@ -53,21 +51,15 @@ const ProductsForm = () => {
     ProductsFormValidator.validate(form)
       .then((form) => {
         onRegister();
-        alert('성공적으로 상품이 생성되었습니다');
-        window.location = '/menu';
+        setTimeout(() => (window.location = '/menu'), 1000);
       })
       .catch((err) => {
-        alert('상품 생성에 실패했습니다.');
         console.log(err);
       });
   };
 
   const Error = ({ message }) => <div className="error-container">{message}</div>;
 
-  // 대기 중일 때
-  if (loading) {
-    return <Loading />;
-  }
   // 에러났을때
   if (error) {
     return <div>에러가 발생했습니다..</div>;
@@ -172,8 +164,9 @@ const ProductsForm = () => {
         <span className="infoText">* 항목은 필수 입력입니다.</span>
         <div className="form-group">
           <button type="submit" className="btn btn-submit">
+            {loading && <BtnLoading />}
+            {/* <BtnLoading /> */}
             상품생성
-            {loading && <span>로딩 중...</span>}
           </button>
           <Link to="/menu">
             <button className="goBack">뒤로가기</button>
