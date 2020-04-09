@@ -16,7 +16,7 @@ const Found = () => {
     <div>
       <Subtitle title="지점소개" />
       <CONTAINER padding="70px 0">
-        <Pathtitle pathtext="지점소개 > 정보페이지" />
+        <Pathtitle pathtext="지점소개" />
         <Switch>
           <Route path={['/found/list', '/found']} exact component={ListWrap} />
           <Route path="/found/add" component={FoundAdd} />

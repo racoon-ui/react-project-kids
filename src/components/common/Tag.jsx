@@ -45,6 +45,11 @@ const INNER = (props) => (
     css={css`
       margin: 0 auto;
       width: ${props.width || '1080px'};
+      &:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
     `}
     {...props}
   >

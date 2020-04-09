@@ -7,6 +7,9 @@ import Icon from '../common/Icon';
 
 import { CheckLogin } from '../CheckLogin';
 import { Link } from 'react-router-dom';
+
+import '../../styles/button.scss';
+
 const FoundListstyle = css`
   margin: 0 auto;
   width: 1080px;
@@ -71,9 +74,14 @@ const ListView = ({ posts, postsremove }) => {
             </tbody>
           </TABLE>
           <CheckLogin login>
-            <button onClick={() => postsremove(post._id)}>지점삭제</button>
-            <button onClick={() => console.log(post._id)}>상세보기</button>
-            <Link to={`/found/detail/${post._id}`}>상세보기</Link>
+            <div className="button-container-1">
+              <span className="mas">지점삭제</span>
+              <button onClick={() => postsremove(post._id)}>지점삭제</button>
+            </div>
+            <div className="button-container-2">
+              <span className="mas">상세보기</span>
+              <Link to={`/found/detail/${post._id}`}>상세보기</Link>
+            </div>
           </CheckLogin>
         </LISTITEM>
       ))}
