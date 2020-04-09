@@ -1,23 +1,24 @@
 /*global kakao*/
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { jsx,css } from '@emotion/core';
 import { useEffect } from 'react';
 
 const mapstyle = css`
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   @media (min-width: 1024px) {
     /* pc */
-    margin-bottom: 50px;
+
   }
   @media (max-width: 1024px) {
     /* m */
-    margin-bottom: 25px;
+
   }
 `;
 
-const MapContent = ({ code1, code2 }) => {
+
+const MapContent = ({ code1, code2  }) => {
   useEffect(() => {
     const script = document.createElement('script');
     script.async = true;

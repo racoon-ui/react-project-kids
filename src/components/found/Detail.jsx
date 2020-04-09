@@ -1,10 +1,37 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import { useState, useEffect, Fragment } from 'react';
+import { jsx,css } from '@emotion/core';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Loding from '../common/Loding';
 import { INNER, TABLE } from '../common/Tag';
 import MapContent from '../found/MapContent';
+import Icon from '../common/Icon';
+
+
+
+
+
+
+const Detailstyle = css`
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  #Mymap{
+    height:500px;
+  }
+  @media (min-width: 1024px) {
+    /* pc */
+
+  }
+  @media (max-width: 1024px) {
+    /* m */
+
+  }
+`;
+
+
+
+
 
 const Detail = ({ match }) => {
   const [datalists, setDatalists] = useState(null); //axios로 불러온 데이터 담긴곳
@@ -40,9 +67,9 @@ const Detail = ({ match }) => {
   if (!datalists) return null;
 
   return (
-    <Fragment>
+    <div css={Detailstyle}>
       <INNER>
-        <h2>매장안내</h2>
+        <h2><Icon type="IoIosArrowDroprightCircle" />매장안내</h2>
         <TABLE>
           <colgroup>
             <col width="20%" />
@@ -79,10 +106,10 @@ const Detail = ({ match }) => {
       </INNER>
 
       <INNER>
-        <h2>매장위치</h2>
+        <h2><Icon type="IoIosArrowDroprightCircle" />매장위치</h2>
         <MapContent code1={datalists.location.coordinates[0]} code2={datalists.location.coordinates[1]} />
       </INNER>
-    </Fragment>
+    </div>
   );
 };
 
