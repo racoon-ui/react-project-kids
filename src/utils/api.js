@@ -25,6 +25,7 @@ import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 // import store from 'store';
 import { getToken, isLogin } from './auth';
+import { baseURL as apiurl } from '../config';
 /**
  * useReducer hook 을 이용하기 위한 action 처리
  * REST API 호출의 시작과 종료에 해당하는 액션입니다.
@@ -41,7 +42,7 @@ const actions = {
  * author: dante@stunitas.com (2019.08.27)
  */
 const axiosInstance = axios.create({
-  baseURL: 'https://shrouded-escarpment-56668.herokuapp.com',
+  baseURL: apiurl,
 });
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -49,7 +50,6 @@ axiosInstance.interceptors.request.use(
       config.headers.Authorization = getToken();
     }
     config.headers.ContentType = 'application/json';
-    // config.headers['X-CSRF-TOKEN'] = document.getElementsByName('csrf-token')[0].content;
     return config;
   },
   (err) => Promise.reject(err),
@@ -109,7 +109,6 @@ export default function useRestApi(config, options) {
   if (typeof config === 'string') {
     config = {
       url: config,
-      method: options.method,
     };
   }
   const [state, dispatch] = useReducer(reducer, createInitialState(options));

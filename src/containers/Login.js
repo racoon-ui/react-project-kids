@@ -71,14 +71,14 @@ const Login = () => {
 
   const errrorLength = Object.keys(errors).length;
 
-  // const [{ loading, error }] = useRestApi('/api/users/login', {
-  //   method: 'post',
-  //   manual: false,
-  //   data: { ...form },
-  // });
-  // console.log('loading', loading);
-  // console.log('error', error);
-  // console.log('form', form);
+  const [{ loading, error }] = useRestApi('/api/users/login', {
+    method: 'post',
+    manual: false,
+    data: { ...form },
+  });
+  console.log('loading', loading);
+  console.log('error', error);
+  console.log('form', form);
 
   const [{ loading, error, data }] = useRestApi('/api/stores', { manual: false });
 
@@ -86,7 +86,7 @@ const Login = () => {
   console.log('error', error);
   console.log('data', data);
 
-  // if (loading) console.log('loading');
+  // if (loading) return console.log('loading');
   // if (data) return console.log('data', data);
   // if (error) return console.log('error', error);
 
