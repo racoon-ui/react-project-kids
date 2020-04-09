@@ -50,15 +50,17 @@ const ListPagination = ({ dataCutNum, totalPosts, paginate, currentPage }) => {
 
   let numnum1 = 0;
 
-  let numnum2 = 1;
-  for (let h = 1; h <= currentPosts.length; h++) {
-    numnum1 += 10;
-    if (currentPage < numnum1) {
-      numnum2 = h;
-      console.log(numnum2);
-    }
+  let numnum2 = 0;
+  if (currentPage <= 10) {
+    numnum2 = 0;
+  } else if (currentPage <= 20) {
+    numnum2 = 1;
+  } else if (currentPage <= 30) {
+    numnum2 = 2;
+  } else if (currentPage <= 40) {
+    numnum2 = 3;
   }
-
+  console.log(numnum2);
   return (
     <div className="pagination" css={Paggingstyle}>
       <button onClick={() => paginate(1)}>
@@ -67,7 +69,7 @@ const ListPagination = ({ dataCutNum, totalPosts, paginate, currentPage }) => {
       <button onClick={() => currentPage > 1 && paginate(currentPage - 1)}>
         <Icon type="IoMdArrowDropleft" />
       </button>
-      {currentPosts[1].map((number) => (
+      {currentPosts[numnum2].map((number) => (
         <button onClick={() => paginate(number)} key={number} className={number === currentPage ? 'on' : ''}>
           {number}
         </button>
