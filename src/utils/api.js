@@ -109,7 +109,6 @@ export default function useRestApi(config, options) {
   if (typeof config === 'string') {
     config = {
       url: config,
-      method: options.method,
     };
   }
   const [state, dispatch] = useReducer(reducer, createInitialState(options));

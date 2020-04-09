@@ -32,6 +32,8 @@ const Login = () => {
     validationSchema: LoginValidator,
   });
 
+  const [{ loading, error, data }, fetchData] = useRestApi(null, { manual: true });
+
   const onChange = (e) => {
     const changeForm = {
       ...form,
@@ -41,22 +43,30 @@ const Login = () => {
   };
 
   const onRegister = () => {
-    axios
-      .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', {
-        ...form,
-      })
-      .then(function (response) {
-        store.set('token', response.data.token);
-        store.set(
-          'email',
-          response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
-        );
-        alert('로그인이 완료되었습니다 :)');
-        window.location = '/';
-      })
-      .catch(function (error) {
-        console.log('로그인 정보가 잘못되었습니다');
-      });
+    console.log('onRegister');
+
+    fetchData({
+      url: '/api/users/login',
+      method: 'POST',
+      data: form,
+    });
+    // fetchData('/api/users/login', ...ㅏorm);
+    // axios
+    //   .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', {
+    //     ...form,
+    //   })
+    //   .then(function (response) {
+    //     store.set('token', response.data.token);
+    //     store.set(
+    //       'email',
+    //       response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
+    //     );
+    //     alert('로그인이 완료되었습니다 :)');
+    //     window.location = '/';
+    //   })
+    //   .catch(function (error) {
+    //     console.log('로그인 정보가 잘못되었습니다');
+    //   });
   };
 
   const onSubmit = (e) => {
@@ -80,17 +90,15 @@ const Login = () => {
   // console.log('error', error);
   // console.log('form', form);
 
-  const [{ loading, error, data }] = useRestApi('/api/stores', { manual: false });
+  // const [{ loading, error, data }] = useRestApi('/api/stores', { manual: false });
 
-  console.log('loading', loading);
-  console.log('error', error);
-  console.log('data', data);
-
-  // if (loading) console.log('loading');
-  // if (data) return console.log('data', data);
-  // if (error) return console.log('error', error);
+  // console.log('loading', loading);
+  // console.log('error', error);
+  // console.log('data', data);
 
   // if (store.get('token')) return <Redirect to="/" />;
+
+  console.log(data);
 
   return (
     <FormStyle>
@@ -136,6 +144,7 @@ const Login = () => {
             {errors.password && <p className="txt_errors">{errors.password.message}</p>}
           </div>
         </div>
+        <div className="row_group">{error && <span>{error.message}</span>}</div>
         <div className="btn_box">
           <button
             type="submit"
@@ -145,6 +154,7 @@ const Login = () => {
             disabled={errrorLength > 0 ? true : false}
           >
             로그인하기
+            {loading && <span>로딩 중...</span>}
           </button>
         </div>
       </form>
