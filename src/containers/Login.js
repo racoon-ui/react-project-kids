@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { jsx } from '@emotion/core';
 import FormStyle from '../styles/FormStyle';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { LoginValidator } from '../components/validators/LoginValidator';
 import store from 'store';
 import { Redirect } from 'react-router-dom';
 import useRestApi from '../utils/api';
+import { ClockLoader } from 'react-spinners';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -41,7 +42,6 @@ const Login = () => {
     store.set('token', data.token);
     // store.set('id', data.config.data.slice(10, data.config.data.indexOf('@'), data.config.data.length));
     store.set('id', data._id);
-    alert('로그인이 완료되었습니다 :)');
     window.location = '/';
   }
 
@@ -110,10 +110,14 @@ const Login = () => {
             name="btn_submit"
             className="btn_submit"
             ref={register}
-            disabled={errrorLength > 0 ? true : false}
+            disabled={errrorLength > 0 || loading ? true : false}
           >
             로그인하기
-            {loading && <span>로딩 중...</span>}
+            {loading && (
+              <span className="icon_loading">
+                <ClockLoader size="20px" color="#fff" />
+              </span>
+            )}
           </button>
         </div>
       </form>

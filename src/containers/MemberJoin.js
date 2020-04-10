@@ -4,7 +4,8 @@ import { jsx } from '@emotion/core';
 import { MemberJoinValidator } from '../components/validators/MemberJoinValidator';
 import { useForm } from 'react-hook-form';
 import FormStyle from '../styles/FormStyle';
-import axios from 'axios';
+import { ClockLoader } from 'react-spinners';
+import useRestApi from '../utils/api';
 
 const MemberJoin = () => {
   const [form, setForm] = useState({
@@ -21,7 +22,9 @@ const MemberJoin = () => {
     validationSchema: MemberJoinValidator,
   });
 
-  const onChange = e => {
+  const [{ loading, error, data }, fetchData] = useRestApi(null);
+
+  const onChange = (e) => {
     const changeForm = {
       ...form,
       [e.target.name]: e.target.value,
@@ -30,26 +33,22 @@ const MemberJoin = () => {
   };
 
   const onRegister = () => {
-    axios
-      .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/register', {
-        ...form,
-      })
-      .then(function(response) {
-        console.log(response);
-        alert('회원가입이 성공적으로 완료되었습니다. 로그인을 진행해주세요 :)');
-        window.location = '/login';
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    fetchData({
+      url: '/api/users/register',
+      method: 'POST',
+      data: form,
+    });
   };
+  if (data) {
+    window.location = '/login';
+  }
 
   const onSubmit = () => {
     MemberJoinValidator.validate(form)
-      .then(form => {
+      .then((form) => {
         onRegister();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -157,15 +156,21 @@ const MemberJoin = () => {
             {errors.password_confirm && <p className="txt_errors">{errors.password_confirm.message}</p>}
           </div>
         </div>
+        <div className="row_group">{error && <span>{error.message}</span>}</div>
         <div className="btn_box">
           <button
             type="submit"
             className="btn_submit"
             ref={register}
             name="btn_submit"
-            disabled={errrorLength > 0 ? true : false}
+            disabled={errrorLength > 0 || loading ? true : false}
           >
             가입하기
+            {loading && (
+              <span className="icon_loading">
+                <ClockLoader size="20px" color="#fff" />
+              </span>
+            )}
           </button>
         </div>
       </form>
