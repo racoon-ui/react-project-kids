@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 
+// 상품 상세 모달창
 const ProductsModal = ({ children, show, setShow }) => {
   const content = show && (
     <div className="overlay">
