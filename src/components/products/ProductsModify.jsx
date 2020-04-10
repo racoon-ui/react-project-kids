@@ -4,10 +4,13 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductsFormValidator } from './ProductsFormValidator';
 import { Link } from 'react-router-dom';
+
 import ProductsFormStyle from './ProductsFormStyle';
+
 import axios from 'axios';
 import store from 'store';
 
+// 상품수정 폼(화면만 만들어 둔 상태, 기능 미구현)
 function ProductsModify() {
   const [form, setForm] = useState({
     category: '',
@@ -45,7 +48,7 @@ function ProductsModify() {
     axios
       .patch(`https://shrouded-escarpment-56668.herokuapp.com/api/products/${_id}`, form, config)
       .then(function (response) {
-        alert('성공적으로 상품이 생성되었습니다');
+        alert('성공적으로 상품이 수정되었습니다.');
         window.location = '/menu';
       })
       .catch(function (error) {
@@ -56,7 +59,7 @@ function ProductsModify() {
 
   return (
     <ProductsFormStyle>
-      <h3>상품등록</h3>
+      <h3>상품수정</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label htmlFor="category" className="control-label">

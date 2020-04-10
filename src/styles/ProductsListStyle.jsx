@@ -2,7 +2,6 @@
 import styled from '@emotion/styled';
 
 const ProductsListStyle = styled('div')`
-  //menuListStyle
   .menuListInfo {
     overflow: hidden;
     margin-left: -3%;
@@ -70,7 +69,6 @@ const ProductsListStyle = styled('div')`
     }
   }
 
-  // modalStyle
   .overlay {
     z-index: 98;
     position: fixed;
@@ -142,13 +140,12 @@ const ProductsListStyle = styled('div')`
     }
   }
 
-  // pagingStyle
   .pagination {
     overflow: hidden;
     margin: 50px auto 0;
-    width: 100px;
+    text-align: center;
     li {
-      float: left;
+      display: inline-block;
       margin-left: 10px;
       &:first-of-type {
         margin-left: 0;

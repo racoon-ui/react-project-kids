@@ -3,6 +3,7 @@ import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import MenuList from './MenuList';
+import { CheckLogin } from './CheckLogin';
 
 const subConainter = css`
   padding: 50px 100px;
@@ -32,9 +33,11 @@ const Menu_01 = () => {
   return (
     <div css={subConainter}>
       <h3 css={subTitle}>메뉴</h3>
-      <Link to="/menu/productAdd">
-        <Button>상품등록</Button>
-      </Link>
+      <CheckLogin login>
+        <Link to="/menu/productAdd">
+          <Button>상품등록</Button>
+        </Link>
+      </CheckLogin>
       <MenuList />
     </div>
   );
