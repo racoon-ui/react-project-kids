@@ -106,6 +106,7 @@ const FoundList = (props) => {
       <SearchBar searchBtn={searchBtn}>검색</SearchBar>
 
       <ListView posts={currentPosts} loading={loading} postsremove={postsremove} />
+
       <ListPagination
         dataCutNum={dataCutNum}
         totalPosts={datalists.length}
