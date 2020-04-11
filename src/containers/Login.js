@@ -4,22 +4,24 @@ import { jsx } from '@emotion/core';
 import FormStyle from '../styles/FormStyle';
 import { useForm } from 'react-hook-form';
 import { LoginValidator } from '../components/validators/LoginValidator';
-import axios from 'axios';
 import store from 'store';
 import { Redirect } from 'react-router-dom';
+import useRestApi from '../utils/api';
+import { ClockLoader } from 'react-spinners';
 
 const Login = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
-
   const { email, password } = form;
 
   const { register, errors, handleSubmit } = useForm({
     mode: 'onBlur',
     validationSchema: LoginValidator,
   });
+
+  const [{ loading, error, data }, fetchData] = useRestApi(null);
 
   const onChange = (e) => {
     const changeForm = {
@@ -30,23 +32,18 @@ const Login = () => {
   };
 
   const onRegister = () => {
-    axios
-      .post('https://shrouded-escarpment-56668.herokuapp.com/api/users/login', {
-        ...form,
-      })
-      .then(function (response) {
-        store.set('token', response.data.token);
-        store.set(
-          'email',
-          response.config.data.slice(10, response.config.data.indexOf('@'), response.config.data.length),
-        );
-        alert('로그인이 완료되었습니다 :)');
-        window.location = '/';
-      })
-      .catch(function (error) {
-        console.log('로그인 정보가 잘못되었습니다');
-      });
+    fetchData({
+      url: '/api/users/login',
+      method: 'POST',
+      data: form,
+    });
   };
+  if (data) {
+    store.set('token', data.token);
+    // store.set('id', data.config.data.slice(10, data.config.data.indexOf('@'), data.config.data.length));
+    store.set('id', data._id);
+    window.location = '/';
+  }
 
   const onSubmit = (e) => {
     LoginValidator.validate(form)
@@ -106,15 +103,21 @@ const Login = () => {
             {errors.password && <p className="txt_errors">{errors.password.message}</p>}
           </div>
         </div>
+        <div className="row_group">{error && <span>{error.message}</span>}</div>
         <div className="btn_box">
           <button
             type="submit"
             name="btn_submit"
             className="btn_submit"
             ref={register}
-            disabled={errrorLength > 0 ? true : false}
+            disabled={errrorLength > 0 || loading ? true : false}
           >
             로그인하기
+            {loading && (
+              <span className="icon_loading">
+                <ClockLoader size="20px" color="#fff" />
+              </span>
+            )}
           </button>
         </div>
       </form>

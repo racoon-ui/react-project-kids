@@ -47,6 +47,7 @@ const FormStyle = styled('div')`
   .btn_box {
     margin-top: 40px;
     button {
+      position: relative;
       display: block;
       font-weight: bold;
       width: 100%;
@@ -57,6 +58,11 @@ const FormStyle = styled('div')`
       background: #0062a9;
       &:disabled {
         background: gray;
+      }
+      .icon_loading {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
       }
     }
   }

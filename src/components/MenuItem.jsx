@@ -1,54 +1,65 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
-import ProdcutsModal from './products/ProductsModal';
-import { Link } from 'react-router-dom';
 
-const MenuItem = (menu) => {
+import ProdcutsModal from './products/ProductsModal';
+import { CheckLogin } from './CheckLogin';
+
+// 상품 리스트 자식
+const MenuItem = ({ data, onRemove }) => {
   const [show, setShow] = useState(false);
-  const [MenuInfo] = useState(menu.data);
-  const { onRemove } = menu;
 
   return (
     <li>
-      <Link to={`/menu/${MenuInfo._id}`}>
+      <a href="#;" onClick={() => setShow(true)}>
         <div className="menuImg">
-          <img src={MenuInfo.image} alt={MenuInfo.name} />
+          <img src={data.image} alt={data.name} />
         </div>
         <div className="menuInfo">
-          <p>카테고리 : {MenuInfo.category}</p>
-          <p>메뉴이름 : {MenuInfo.name}</p>
-          <p>메뉴상세 : {MenuInfo.summary}</p>
+          <p>카테고리 : {data.category}</p>
+          <p>메뉴이름 : {data.name}</p>
+          <p>메뉴상세 : {data.summary}</p>
           <p className="menuPrice">
-            메뉴가격 : {MenuInfo.price.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}원
+            메뉴가격 :
+            {data.price.toLocaleString(navigator.language, {
+              minimumFractionDigits: 0,
+            })}
+            원
           </p>
-          <p>메뉴상세정보 : {MenuInfo.description}</p>
+          <p>메뉴상세정보 : {data.description}</p>
         </div>
-      </Link>
+      </a>
 
       <button className="openBtnModal" onClick={() => setShow(true)}>
         상품상세
       </button>
-      <Link to="/menu/productModify">
-        <button className="modifyBtn">상품수정</button>
-      </Link>
 
-      <button className="delBtn" onClick={() => onRemove(MenuInfo._id)}>
-        상품삭제
-      </button>
+      <CheckLogin login>
+        <button className="modifyBtn" onClick={() => alert('준비중입니다 :)')}>
+          상품수정
+        </button>
+
+        <button className="delBtn" onClick={() => onRemove(data._id)}>
+          상품삭제
+        </button>
+      </CheckLogin>
 
       <ProdcutsModal show={show} setShow={setShow}>
         <div className="menuImg">
-          <img src={MenuInfo.image} alt={MenuInfo.name} />
+          <img src={data.image} alt={data.name} />
         </div>
         <div className="menuInfo">
-          <p>카테고리 : {MenuInfo.category}</p>
-          <p>메뉴이름 : {MenuInfo.name}</p>
-          <p>메뉴상세 : {MenuInfo.summary}</p>
+          <p>카테고리 : {data.category}</p>
+          <p>메뉴이름 : {data.name}</p>
+          <p>메뉴상세 : {data.summary}</p>
           <p className="menuPrice">
-            메뉴가격 : {MenuInfo.price.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}원
+            메뉴가격 :
+            {data.price.toLocaleString(navigator.language, {
+              minimumFractionDigits: 0,
+            })}
+            원
           </p>
-          <p>메뉴상세정보 : {MenuInfo.description}</p>
+          <p>메뉴상세정보 : {data.description}</p>
         </div>
       </ProdcutsModal>
     </li>

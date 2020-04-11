@@ -4,11 +4,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ProductsFormValidator } from './ProductsFormValidator';
 import { Link } from 'react-router-dom';
-import ProductsFormStyle from './ProductsFormStyle';
-import axios from 'axios';
-import store from 'store';
 
-function ProductsForm() {
+import ProductsFormStyle from './ProductsFormStyle';
+import BtnLoading from './BtnLoading';
+
+import useRestApi from '../../utils/api';
+
+// 상품생성 폼
+const ProductsForm = () => {
   const [form, setForm] = useState({
     category: '',
     name: '',
@@ -20,17 +23,12 @@ function ProductsForm() {
 
   const { category, name, image, summary, price, description } = form;
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: store.get('token'),
-    },
-  };
-
-  const { register, errors } = useForm({
+  const { register, errors, handleSubmit } = useForm({
     mode: 'onBlur',
     validationSchema: ProductsFormValidator,
   });
+
+  const [{ loading, error, data }, fetchData] = useRestApi('/api/products', { manual: false });
 
   const onChange = (e) => {
     const productForm = {
@@ -40,24 +38,39 @@ function ProductsForm() {
     setForm(productForm);
   };
 
+  const onRegister = () => {
+    console.log('onRegister');
+    fetchData({
+      url: '/api/products',
+      method: 'POST',
+      data: form,
+    });
+  };
+
   const onSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post('https://shrouded-escarpment-56668.herokuapp.com/api/products', form, config)
-      .then(function (response) {
-        alert('성공적으로 상품이 생성되었습니다');
-        window.location = '/menu';
+    ProductsFormValidator.validate(form)
+      .then((form) => {
+        onRegister();
+        setTimeout(() => (window.location = '/menu'), 1000);
       })
-      .catch(function (error) {
-        alert('실패했습니다.');
+      .catch((err) => {
+        console.log(err);
       });
   };
+
   const Error = ({ message }) => <div className="error-container">{message}</div>;
+
+  // 에러났을때
+  if (error) {
+    return <div>에러가 발생했습니다..</div>;
+  }
+  //아직 값이 설정되지 않았을 때
+  if (!data) return null;
 
   return (
     <ProductsFormStyle>
       <h3>상품등록</h3>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label htmlFor="category" className="control-label">
             카테고리 <em>*</em>
@@ -151,6 +164,8 @@ function ProductsForm() {
         <span className="infoText">* 항목은 필수 입력입니다.</span>
         <div className="form-group">
           <button type="submit" className="btn btn-submit">
+            {loading && <BtnLoading />}
+            {/* <BtnLoading /> */}
             상품생성
           </button>
           <Link to="/menu">
@@ -160,6 +175,6 @@ function ProductsForm() {
       </form>
     </ProductsFormStyle>
   );
-}
+};
 
 export default ProductsForm;

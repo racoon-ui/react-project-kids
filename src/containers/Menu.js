@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import AuthRoute from '../components/AuthRoute';
 
 import Subtitle from '../components/Subtitle';
 
@@ -21,8 +22,8 @@ const Menu = () => {
         <Route path="/menu/menu02" component={Menu_02} />
         <Route path="/menu/menu03" component={Menu_03} />
         <Route path="/menu/menu04" component={Menu_04} />
-        <Route path="/menu/productAdd" component={productAdd} />
-        <Route path="/menu/productModify" component={productModify} />
+        <AuthRoute path="/menu/productAdd" component={productAdd} />
+        <AuthRoute path="/menu/productModify" component={productModify} />
       </Switch>
     </div>
   );
