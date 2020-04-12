@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import Loding from '../common/Loding';
+// import { useState } from 'react';
+
+import Loading from '../common/Loading';
 import { INNER, TABLE } from '../common/Tag';
 import MapContent from '../found/MapContent';
 import Icon from '../common/Icon';
-
+import useRestApi from '../../utils/api';
 const Detailstyle = css`
   .inner {
     margin-bottom: 40px;
@@ -40,36 +40,13 @@ const Detailstyle = css`
 `;
 
 const Detail = ({ match }) => {
-  const [datalists, setDatalists] = useState(null); //axios로 불러온 데이터 담긴곳
-  const [loading, setLoading] = useState(false); //로딩 컴포넌트
-  const [error, setError] = useState(null);
-  //const [hello] = useState(match.params.id);
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        // 요청이 시작 할 때에는 error 와 datalist 를 초기화하고
-        setError(null);
-        setDatalists(null);
-        // loading 상태를 true 로 바꿉니다.
-        setLoading(true);
-        const response = await axios.get(
-          `https://shrouded-escarpment-56668.herokuapp.com/api/stores/${match.params.id}`,
-        );
-        /* 에러용 URL */
-        //const response = await axios.get('https://jsonplaceholder.typicode.com/users/showmeerror');
-        /* 에러용 URL */
-        setDatalists(response.data); //뿌려질용
-        console.log(response.data);
-      } catch (e) {
-        setError(e);
-      }
-      setLoading(false);
-    };
-    fetchUsers();
-  }, [match.params.id]);
+  const [{ loading, data: datalists, error }] = useRestApi(`/api/stores/${match.params.id}`, { manual: false });
 
-  if (loading) return <Loding />;
+  // 대기 중일 때
+  if (loading) return <Loading />;
+  // 에러
   if (error) return <div>에러가 발생했습니다</div>;
+  //아직 값이 설정되지 않았을 때
   if (!datalists) return null;
 
   return (

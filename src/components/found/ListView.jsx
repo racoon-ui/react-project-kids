@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 
+/* style */
 import { TABLE, LISTWRAP, LISTITEM } from '../common/Tag';
-
-import Icon from '../common/Icon';
-
-import { CheckLogin } from '../CheckLogin';
-import { Link } from 'react-router-dom';
-
 import '../../styles/button.scss';
+
+/* common */
+import { Link } from 'react-router-dom';
+import { CheckLogin } from '../CheckLogin';
+import Icon from '../common/Icon';
 
 const FoundListstyle = css`
   margin: 0 auto;
@@ -38,7 +38,7 @@ const FoundListstyle = css`
   }
 `;
 
-const ListView = ({ posts, postsremove }) => {
+const ListView = ({ posts, listDeletion }) => {
   return (
     <LISTWRAP css={FoundListstyle}>
       {posts.map((post) => (
@@ -76,7 +76,7 @@ const ListView = ({ posts, postsremove }) => {
           <CheckLogin login>
             <div className="button-container-1">
               <span className="mas">지점삭제</span>
-              <button onClick={() => postsremove(post._id)}>지점삭제</button>
+              <button onClick={() => listDeletion(post._id)}>지점삭제</button>
             </div>
             <div className="button-container-2">
               <span className="mas">상세보기</span>

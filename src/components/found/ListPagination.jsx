@@ -70,7 +70,7 @@ const ListPagination = ({ dataCutNum, totalPosts, paginate, currentPage }) => {
   if (currentPage > 10) {
     ArryIndex = String(currentPage - 1).slice(0, -1);
   }
-  console.log(ArryIndex);
+  //console.log(ArryIndex);
   //--------------------------------------------------------------
   return (
     <div className="pagination" css={Paggingstyle}>
