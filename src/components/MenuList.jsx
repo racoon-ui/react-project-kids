@@ -10,6 +10,10 @@ import useRestApi from '../utils/api';
 
 // 상품 리스트 부모
 const MenuList = () => {
+  /**
+   * 소스수정
+   * 상품수정
+   */
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
@@ -30,7 +34,7 @@ const MenuList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <ProductsListStyle lo>
+    <ProductsListStyle>
       <Menus menus={currentPosts} />
       <Pagination postsPerPage={postsPerPage} totalPosts={menus.length} paginate={paginate} />
     </ProductsListStyle>

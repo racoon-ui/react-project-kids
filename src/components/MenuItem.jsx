@@ -6,7 +6,7 @@ import ProdcutsModal from './products/ProductsModal';
 import { CheckLogin } from './CheckLogin';
 
 // 상품 리스트 자식
-const MenuItem = ({ data, onRemove }) => {
+const MenuItem = ({ data, onModify, onRemove }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -35,7 +35,11 @@ const MenuItem = ({ data, onRemove }) => {
       </button>
 
       <CheckLogin login>
-        <button className="modifyBtn" onClick={() => alert('준비중입니다 :)')}>
+        {/* <button className="modifyBtn" onClick={() => alert('준비중입니다 :)')}>
+          상품수정
+        </button> */}
+
+        <button className="modifyBtn" onClick={() => onModify(data._id)}>
           상품수정
         </button>
 
